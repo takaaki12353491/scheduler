@@ -9,7 +9,7 @@ const init: Date = {
   month: day.month() + 1
 }
 
-const calendarReducer = (state = init, action: { type: string, payload: Date }) => {
+const dateReducer = (state = init, action: { type: string, payload: Date }) => {
   const { type, payload } = action
   switch (type) {
     case CALENDAR_SET_MONTH:
@@ -19,4 +19,4 @@ const calendarReducer = (state = init, action: { type: string, payload: Date }) 
   }
 }
 
-export default calendarReducer
+export default dateReducer

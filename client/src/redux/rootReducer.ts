@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import calendarReducer from './calendar/reducer'
+import dateReducer from './calendar/reducer'
 
-const rootReducer = combineReducers({ calendar: calendarReducer })
+const rootReducer = combineReducers({ date: dateReducer })
 
 export default rootReducer
