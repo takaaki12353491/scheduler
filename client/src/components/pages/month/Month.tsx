@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { GridList, Typography, makeStyles } from '@material-ui/core'
+import Base from '../../templates/base/Base'
 import Element from './Element'
 import { createCalendar } from '../../../modules/calendar'
 import border from '../../../styles/border'
@@ -12,28 +13,30 @@ const Month = () => {
   const date = useSelector(state => state.date)
   const calendar = createCalendar(date)
   return (
-    <div className={classes.container}>
-      <GridList className={classes.grid} cols={7} spacing={0} cellHeight='auto'>
-        {days.map(d => (
-          <li key={d}>
-          <Typography
-            className={classes.days}
-            color="textSecondary"
-            align="center"
-            variant="caption"
-            component="div"
-          >
-            {d}
-          </Typography>
-        </li>
-        ))}
-        {calendar.map(c => (
-          <li key={c.toISOString()}>
-            <Element day={c}/>
+    <Base>
+      <div className={classes.container}>
+        <GridList className={classes.grid} cols={7} spacing={0} cellHeight='auto'>
+          {days.map(d => (
+            <li key={d}>
+            <Typography
+              className={classes.days}
+              color="textSecondary"
+              align="center"
+              variant="caption"
+              component="div"
+            >
+              {d}
+            </Typography>
           </li>
-        ))}
-      </GridList>
-    </div>
+          ))}
+          {calendar.map(c => (
+            <li key={c.toISOString()}>
+              <Element day={c}/>
+            </li>
+          ))}
+        </GridList>
+      </div>
+    </Base>
   )
 }
 export default Month
