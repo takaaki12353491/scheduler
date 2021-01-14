@@ -1,69 +1,52 @@
 import React from 'react'
-import styled from 'styled-components'
-import { GridList } from '@material-ui/core'
+import { GridList, Typography, makeStyles } from '@material-ui/core'
+import Element from './Element'
+import { createCalendar } from '../../../modules/calendar'
+import border from '../../../styles/border'
 
-const calendar = [
-  '29',
-  '30',
-  '10月1日',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20',
-  '21',
-  '22',
-  '23',
-  '24',
-  '25',
-  '26',
-  '27',
-  '28',
-  '29',
-  '30',
-  '31',
-  '11月1日',
-  '2'
-]
+const days = ['日', '月', '火', '水', '木', '金', '土'];
+
+const calendar = createCalendar()
 
 const Month = () => {
+  const classes = useStyles() 
   return (
-    <Container>
-      <SCGridList cols={7} spacing={0} cellHeight='auto'>
+    <div className={classes.container}>
+      <GridList className={classes.grid} cols={7} spacing={0} cellHeight='auto'>
+        {days.map(d => (
+          <li key={d}>
+          <Typography
+            className={classes.days}
+            color="textSecondary"
+            align="center"
+            variant="caption"
+            component="div"
+          >
+            {d}
+          </Typography>
+        </li>
+        ))}
         {calendar.map(c => (
-          <li>
-            <Element>{c}</Element>
+          <li key={c.toISOString()}>
+            <Element day={c}/>
           </li>
         ))}
-      </SCGridList>
-    </Container>
+      </GridList>
+    </div>
   )
 }
 export default Month
 
-const Container = styled.div`
-  height: 90vh;
-`
-const SCGridList = styled(GridList)`
-  border-left: 1px solid #ccc;
-  border-top: 1px solid #ccc;
-`
-const Element = styled.div`
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  height: 18vh;
-`
+const useStyles = makeStyles(theme => ({
+  container: {
+    height: '90vh',
+  },
+  grid: {
+    borderLeft: border.default,
+    borderTop: border.default,
+  },
+  days: {
+    borderRight: border.default,
+    paddingTop: '10px',
+  },
+}))
