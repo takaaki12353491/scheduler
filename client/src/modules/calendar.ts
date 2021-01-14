@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
-import 'dayjs/locale/ja'
+import { Date } from '../types'
 
-export const createCalendar = () => {
-  const firstDay = dayjs().startOf('month')
+export const createCalendar = (date: Date) => {
+  const firstDay = getMonth(date)
   const firstDayIndex = firstDay.day()
 
   return Array(35).fill(0).map((_, i) => {
@@ -23,3 +23,7 @@ export const isSameMonth = (m1: dayjs.Dayjs, m2: dayjs.Dayjs) => {
 }
 
 export const isFirstDay = (day: dayjs.Dayjs) => day.date() === 1
+
+export const getMonth = ({ year, month }: Date) => {
+  return dayjs(`${year}-${month}`)
+}
