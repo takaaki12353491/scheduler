@@ -1,25 +1,21 @@
 import React from 'react'
 import { Typography, makeStyles } from '@material-ui/core'
 import dayjs from 'dayjs'
-import { isSameMonth, isFirstDay, isSameDay, getMonth } from '../../../modules/calendar'
+import { isSameMonth, isFirstDay, isSameDay } from '../../../modules/calendar'
 import border from '../../../styles/border'
-import { Date } from '../../../types'
 
 type Props = {
   day: dayjs.Dayjs
-  month: Date
+  date: dayjs.Dayjs
 }
 
-const Element: React.FC<Props> = ({ day, month }) => {
+const Element: React.FC<Props> = ({ day, date }) => {
   const classes = useStyles()
-
   const today = dayjs()
   const format = isFirstDay(day) ? 'M月D日' : 'D'
   const isToday = isSameDay(day, today)
-  const currentMonth = getMonth(month);
-  const isCurrentMonth = isSameMonth(day, currentMonth);
-
-  const textColor = isCurrentMonth ? 'textPrimary' : 'textSecondary';
+  const isCurrentMonth = isSameMonth(day, date)
+  const textColor = isCurrentMonth ? 'textPrimary' : 'textSecondary'
   return (
     <div className={classes.element}>
       <Typography

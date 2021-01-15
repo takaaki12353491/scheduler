@@ -31,7 +31,7 @@ const Month = () => {
           ))}
           {calendar.map(c => (
             <li key={c.toISOString()}>
-              <Element day={c} month={date}/>
+              <Element day={c} date={date}/>
             </li>
           ))}
         </GridList>

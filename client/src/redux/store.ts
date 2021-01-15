@@ -1,10 +1,10 @@
 import 'react-redux'
-import { Date } from '../types'
+import dayjs from 'dayjs'
 
 declare module 'react-redux' {
   interface DefaultRootState extends StoreState {}
 }
 
 export type StoreState = {
-  date: Date
+  date: dayjs.Dayjs
 }

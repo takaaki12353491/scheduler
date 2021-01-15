@@ -1,15 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-import { formatMonth, getPreviousMonth, getNextMonth } from '../modules/calendar'
+import { getPreviousMonth, getNextMonth } from '../modules/calendar'
 
-const day = dayjs()
-
-const init = formatMonth(day)
+const today = dayjs()
 
 const dateSlice = createSlice({
   name: 'date',
-  initialState: init,
+  initialState: today,
   reducers: {
+    setMonth: (_, action: PayloadAction<dayjs.Dayjs>) => action.payload,
     previousMonth: state => getPreviousMonth(state),
     nextMonth: state => getNextMonth(state),
   }

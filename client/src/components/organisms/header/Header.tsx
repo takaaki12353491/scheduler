@@ -1,18 +1,25 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { IconButton, Toolbar, Typography, makeStyles } from '@material-ui/core'
 import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons'
 import DehazeIcon from '@material-ui/icons/Dehaze'
+import { KeyboardDatePicker } from '@material-ui/pickers'
+import dayjs from 'dayjs'
 import dateSlice from '../../../redux/date'
 
 const Header = () => {
   const classes = useStyles()
+  const date = useSelector(state => state.date)
   const dispatch = useDispatch()
+  const { actions } = dateSlice
   const handlePrevious = () => {
-    dispatch(dateSlice.actions.previousMonth())
+    dispatch(actions.previousMonth())
   }
   const handleNext = () => {
-    dispatch(dateSlice.actions.nextMonth())
+    dispatch(actions.nextMonth())
+  }
+  const handleSelect = (date: dayjs.Dayjs | null) => {
+    date && dispatch(actions.setMonth(date))
   }
   return (
     <Toolbar className={classes.container}>
@@ -29,6 +36,19 @@ const Header = () => {
       <IconButton size='small' onClick={handleNext}>
         <ArrowForwardIos />
       </IconButton>
+      <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={date}
+          onChange={handleSelect}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
     </Toolbar>
   )
 }
@@ -41,5 +61,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: '0 30px 0 10px',
+  },
+  datePicker: {
+    marginLeft: 30,
   }
 }))
