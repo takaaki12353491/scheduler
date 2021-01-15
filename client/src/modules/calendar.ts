@@ -24,7 +24,8 @@ export const isSameMonth = (m1: dayjs.Dayjs, m2: dayjs.Dayjs) => {
 
 export const isFirstDay = (day: dayjs.Dayjs) => day.date() === 1
 
-export const getMonth = ({ year, month }: Date) => {
+export const getMonth = (date: Date) => {
+  const { year, month} = date
   return dayjs(`${year}-${month}`)
 }
 

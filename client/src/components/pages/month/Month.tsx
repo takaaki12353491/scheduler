@@ -11,7 +11,6 @@ const days = ['日', '月', '火', '水', '木', '金', '土']
 const Month = () => {
   const classes = useStyles()
   const date = useSelector(state => state.date)
-  console.log(date)
   const calendar = createCalendar(date)
   return (
     <Base>
@@ -32,7 +31,7 @@ const Month = () => {
           ))}
           {calendar.map(c => (
             <li key={c.toISOString()}>
-              <Element day={c}/>
+              <Element day={c} month={date}/>
             </li>
           ))}
         </GridList>

@@ -8,6 +8,12 @@ import dateSlice from '../../../redux/date'
 const Header = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const handlePrevious = () => {
+    dispatch(dateSlice.actions.previousMonth())
+  }
+  const handleNext = () => {
+    dispatch(dateSlice.actions.nextMonth())
+  }
   return (
     <Toolbar className={classes.container}>
       <IconButton>
@@ -17,10 +23,10 @@ const Header = () => {
       <Typography className={classes.title} color='textSecondary' variant='h5' component='h1'>
         カレンダー
       </Typography>
-      <IconButton size='small' onClick={() => dispatch(dateSlice.actions.previousMonth)}>
+      <IconButton size='small' onClick={handlePrevious}>
         <ArrowBackIos />
       </IconButton>
-      <IconButton size='small' onClick={() => dispatch(dateSlice.actions.nextMonth)}>
+      <IconButton size='small' onClick={handleNext}>
         <ArrowForwardIos />
       </IconButton>
     </Toolbar>
