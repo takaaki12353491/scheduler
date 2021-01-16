@@ -36,19 +36,9 @@ const Header = () => {
       <IconButton size='small' onClick={handleNext}>
         <ArrowForwardIos />
       </IconButton>
-      <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={date}
-          onChange={handleSelect}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
+      <Typography className={classes.month}>
+        {date.format('YYYY年 M月')}
+      </Typography>
     </Toolbar>
   )
 }
@@ -62,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   title: {
     margin: '0 30px 0 10px',
   },
-  datePicker: {
+  month: {
     marginLeft: 30,
   }
 }))
