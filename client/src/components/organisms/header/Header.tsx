@@ -5,7 +5,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons'
 import DehazeIcon from '@material-ui/icons/Dehaze'
 import { KeyboardDatePicker } from '@material-ui/pickers'
 import dayjs from 'dayjs'
-import dateSlice from '../../../redux/date'
+import dateSlice from '../../../redux/slices/date'
 
 const Header = () => {
   const classes = useStyles()
