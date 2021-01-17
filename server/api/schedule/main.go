@@ -3,7 +3,6 @@ package main
 import (
 	"net"
 	"server/pb"
-	"server/schedule"
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
@@ -16,7 +15,7 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	server := &schedule.Server{}
+	server := &Server{}
 	pb.RegisterScheduleServiceServer(s, server)
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
