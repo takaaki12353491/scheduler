@@ -23,9 +23,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        name: Restore go modules cache
-        keys:
-          - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
+          name: Restore go modules cache
+          keys:
+            - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
       - run:
           name: Vendoring
           command: go mod download
@@ -37,7 +37,6 @@ jobs:
       - run:
           name: Test go package
           command: go test -v ./...
-
   client:
     docker:
       - image: circleci/node:12.18.4
