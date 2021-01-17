@@ -17,12 +17,11 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/server
     environment:
       GO111MODULE: "on"
     steps:
       - checkout
-      - run: cd server
       - restore_cache:
           name: Restore go modules cache
           keys:
