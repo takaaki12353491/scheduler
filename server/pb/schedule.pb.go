@@ -13,7 +13,6 @@ import (
 	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -105,16 +104,14 @@ func (x *Schedule) GetLocation() string {
 	return ""
 }
 
-type ID struct {
+type IndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *ID) Reset() {
-	*x = ID{}
+func (x *IndexRequest) Reset() {
+	*x = IndexRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_schedule_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -122,13 +119,13 @@ func (x *ID) Reset() {
 	}
 }
 
-func (x *ID) String() string {
+func (x *IndexRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ID) ProtoMessage() {}
+func (*IndexRequest) ProtoMessage() {}
 
-func (x *ID) ProtoReflect() protoreflect.Message {
+func (x *IndexRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_schedule_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -140,57 +137,402 @@ func (x *ID) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ID.ProtoReflect.Descriptor instead.
-func (*ID) Descriptor() ([]byte, []int) {
+// Deprecated: Use IndexRequest.ProtoReflect.Descriptor instead.
+func (*IndexRequest) Descriptor() ([]byte, []int) {
 	return file_schedule_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ID) GetId() string {
-	if x != nil {
-		return x.Id
+type IndexResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *IndexResponse) Reset() {
+	*x = IndexResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
 	}
-	return ""
+}
+
+func (x *IndexResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IndexResponse) ProtoMessage() {}
+
+func (x *IndexResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IndexResponse.ProtoReflect.Descriptor instead.
+func (*IndexResponse) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{2}
+}
+
+type ShowRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ShowRequest) Reset() {
+	*x = ShowRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ShowRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShowRequest) ProtoMessage() {}
+
+func (x *ShowRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShowRequest.ProtoReflect.Descriptor instead.
+func (*ShowRequest) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{3}
+}
+
+type ShowResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ShowResponse) Reset() {
+	*x = ShowResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ShowResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShowResponse) ProtoMessage() {}
+
+func (x *ShowResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShowResponse.ProtoReflect.Descriptor instead.
+func (*ShowResponse) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{4}
+}
+
+type CreateRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CreateRequest) Reset() {
+	*x = CreateRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateRequest) ProtoMessage() {}
+
+func (x *CreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateRequest.ProtoReflect.Descriptor instead.
+func (*CreateRequest) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{5}
+}
+
+type CreateResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CreateResponse) Reset() {
+	*x = CreateResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateResponse) ProtoMessage() {}
+
+func (x *CreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateResponse.ProtoReflect.Descriptor instead.
+func (*CreateResponse) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{6}
+}
+
+type UpdateRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateRequest) Reset() {
+	*x = UpdateRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRequest) ProtoMessage() {}
+
+func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateRequest) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{7}
+}
+
+type UpdateResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateResponse) Reset() {
+	*x = UpdateResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateResponse) ProtoMessage() {}
+
+func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
+func (*UpdateResponse) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{8}
+}
+
+type DeleteRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteRequest) Reset() {
+	*x = DeleteRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteRequest) ProtoMessage() {}
+
+func (x *DeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteRequest.ProtoReflect.Descriptor instead.
+func (*DeleteRequest) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{9}
+}
+
+type DeleteResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteResponse) Reset() {
+	*x = DeleteResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_schedule_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteResponse) ProtoMessage() {}
+
+func (x *DeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_schedule_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteResponse.ProtoReflect.Descriptor instead.
+func (*DeleteResponse) Descriptor() ([]byte, []int) {
+	return file_schedule_proto_rawDescGZIP(), []int{10}
 }
 
 var File_schedule_proto protoreflect.FileDescriptor
 
 var file_schedule_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x12, 0x08, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67,
-	0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74,
-	0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
-	0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x9e, 0x01, 0x0a, 0x08, 0x53, 0x63, 0x68,
-	0x65, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64,
-	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2e, 0x0a,
-	0x04, 0x64, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f,
-	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69,
-	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x04, 0x64, 0x61, 0x74, 0x65, 0x12, 0x1a, 0x0a,
-	0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x14, 0x0a, 0x02, 0x49, 0x44, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x32,
-	0x90, 0x02, 0x0a, 0x0f, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x12, 0x37, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x16, 0x2e, 0x67,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
-	0x6d, 0x70, 0x74, 0x79, 0x1a, 0x12, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e,
-	0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x2a, 0x0a, 0x04,
-	0x73, 0x68, 0x6f, 0x77, 0x12, 0x0c, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e,
-	0x49, 0x44, 0x1a, 0x12, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x53, 0x63,
-	0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x06, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x12, 0x12, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x53, 0x63,
-	0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x1a, 0x12, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c,
-	0x65, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x06,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x12, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c,
-	0x65, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x1a, 0x12, 0x2e, 0x73, 0x63, 0x68,
-	0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x00,
-	0x12, 0x30, 0x0a, 0x06, 0x72, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x12, 0x0c, 0x2e, 0x73, 0x63, 0x68,
-	0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x49, 0x44, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
-	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
-	0x22, 0x00, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x12, 0x08, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65,
+	0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x9e, 0x01, 0x0a, 0x08,
+	0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x20,
+	0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x2e, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
+	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x04, 0x64, 0x61, 0x74, 0x65,
+	0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x0e, 0x0a, 0x0c,
+	0x49, 0x6e, 0x64, 0x65, 0x78, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x0f, 0x0a, 0x0d,
+	0x49, 0x6e, 0x64, 0x65, 0x78, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x0d, 0x0a,
+	0x0b, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x0e, 0x0a, 0x0c,
+	0x53, 0x68, 0x6f, 0x77, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x0f, 0x0a, 0x0d,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x10, 0x0a,
+	0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x0f, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x22, 0x10, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x0f, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x22, 0x10, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xc3, 0x02, 0x0a, 0x0f, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75,
+	0x6c, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3a, 0x0a, 0x05, 0x69, 0x6e, 0x64,
+	0x65, 0x78, 0x12, 0x16, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x49, 0x6e,
+	0x64, 0x65, 0x78, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x73, 0x63, 0x68,
+	0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x04, 0x73, 0x68, 0x6f, 0x77, 0x12, 0x15, 0x2e,
+	0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x53, 0x68, 0x6f, 0x77, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e,
+	0x53, 0x68, 0x6f, 0x77, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3d,
+	0x0a, 0x06, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x17, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64,
+	0x75, 0x6c, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x18, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3d, 0x0a,
+	0x06, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x17, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75,
+	0x6c, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3d, 0x0a, 0x06,
+	0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x17, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c,
+	0x65, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x18, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x06, 0x5a, 0x04, 0x2e,
+	0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -205,30 +547,38 @@ func file_schedule_proto_rawDescGZIP() []byte {
 	return file_schedule_proto_rawDescData
 }
 
-var file_schedule_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_schedule_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_schedule_proto_goTypes = []interface{}{
 	(*Schedule)(nil),              // 0: schedule.Schedule
-	(*ID)(nil),                    // 1: schedule.ID
-	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 3: google.protobuf.Empty
+	(*IndexRequest)(nil),          // 1: schedule.IndexRequest
+	(*IndexResponse)(nil),         // 2: schedule.IndexResponse
+	(*ShowRequest)(nil),           // 3: schedule.ShowRequest
+	(*ShowResponse)(nil),          // 4: schedule.ShowResponse
+	(*CreateRequest)(nil),         // 5: schedule.CreateRequest
+	(*CreateResponse)(nil),        // 6: schedule.CreateResponse
+	(*UpdateRequest)(nil),         // 7: schedule.UpdateRequest
+	(*UpdateResponse)(nil),        // 8: schedule.UpdateResponse
+	(*DeleteRequest)(nil),         // 9: schedule.DeleteRequest
+	(*DeleteResponse)(nil),        // 10: schedule.DeleteResponse
+	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_schedule_proto_depIdxs = []int32{
-	2, // 0: schedule.Schedule.date:type_name -> google.protobuf.Timestamp
-	3, // 1: schedule.ScheduleService.index:input_type -> google.protobuf.Empty
-	1, // 2: schedule.ScheduleService.show:input_type -> schedule.ID
-	0, // 3: schedule.ScheduleService.create:input_type -> schedule.Schedule
-	0, // 4: schedule.ScheduleService.update:input_type -> schedule.Schedule
-	1, // 5: schedule.ScheduleService.remove:input_type -> schedule.ID
-	0, // 6: schedule.ScheduleService.index:output_type -> schedule.Schedule
-	0, // 7: schedule.ScheduleService.show:output_type -> schedule.Schedule
-	0, // 8: schedule.ScheduleService.create:output_type -> schedule.Schedule
-	0, // 9: schedule.ScheduleService.update:output_type -> schedule.Schedule
-	3, // 10: schedule.ScheduleService.remove:output_type -> google.protobuf.Empty
-	6, // [6:11] is the sub-list for method output_type
-	1, // [1:6] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	11, // 0: schedule.Schedule.date:type_name -> google.protobuf.Timestamp
+	1,  // 1: schedule.ScheduleService.index:input_type -> schedule.IndexRequest
+	3,  // 2: schedule.ScheduleService.show:input_type -> schedule.ShowRequest
+	5,  // 3: schedule.ScheduleService.create:input_type -> schedule.CreateRequest
+	7,  // 4: schedule.ScheduleService.update:input_type -> schedule.UpdateRequest
+	9,  // 5: schedule.ScheduleService.delete:input_type -> schedule.DeleteRequest
+	2,  // 6: schedule.ScheduleService.index:output_type -> schedule.IndexResponse
+	4,  // 7: schedule.ScheduleService.show:output_type -> schedule.ShowResponse
+	6,  // 8: schedule.ScheduleService.create:output_type -> schedule.CreateResponse
+	8,  // 9: schedule.ScheduleService.update:output_type -> schedule.UpdateResponse
+	10, // 10: schedule.ScheduleService.delete:output_type -> schedule.DeleteResponse
+	6,  // [6:11] is the sub-list for method output_type
+	1,  // [1:6] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_schedule_proto_init() }
@@ -250,7 +600,115 @@ func file_schedule_proto_init() {
 			}
 		}
 		file_schedule_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ID); i {
+			switch v := v.(*IndexRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IndexResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ShowRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ShowResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_schedule_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -268,7 +726,7 @@ func file_schedule_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_schedule_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -294,11 +752,11 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ScheduleServiceClient interface {
-	Index(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (ScheduleService_IndexClient, error)
-	Show(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Schedule, error)
-	Create(ctx context.Context, in *Schedule, opts ...grpc.CallOption) (*Schedule, error)
-	Update(ctx context.Context, in *Schedule, opts ...grpc.CallOption) (*Schedule, error)
-	Remove(ctx context.Context, in *ID, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Index(ctx context.Context, in *IndexRequest, opts ...grpc.CallOption) (*IndexResponse, error)
+	Show(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error)
+	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error)
+	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
 }
 
 type scheduleServiceClient struct {
@@ -309,40 +767,17 @@ func NewScheduleServiceClient(cc grpc.ClientConnInterface) ScheduleServiceClient
 	return &scheduleServiceClient{cc}
 }
 
-func (c *scheduleServiceClient) Index(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (ScheduleService_IndexClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ScheduleService_serviceDesc.Streams[0], "/schedule.ScheduleService/index", opts...)
+func (c *scheduleServiceClient) Index(ctx context.Context, in *IndexRequest, opts ...grpc.CallOption) (*IndexResponse, error) {
+	out := new(IndexResponse)
+	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/index", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &scheduleServiceIndexClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
 
-type ScheduleService_IndexClient interface {
-	Recv() (*Schedule, error)
-	grpc.ClientStream
-}
-
-type scheduleServiceIndexClient struct {
-	grpc.ClientStream
-}
-
-func (x *scheduleServiceIndexClient) Recv() (*Schedule, error) {
-	m := new(Schedule)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *scheduleServiceClient) Show(ctx context.Context, in *ID, opts ...grpc.CallOption) (*Schedule, error) {
-	out := new(Schedule)
+func (c *scheduleServiceClient) Show(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error) {
+	out := new(ShowResponse)
 	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/show", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -350,8 +785,8 @@ func (c *scheduleServiceClient) Show(ctx context.Context, in *ID, opts ...grpc.C
 	return out, nil
 }
 
-func (c *scheduleServiceClient) Create(ctx context.Context, in *Schedule, opts ...grpc.CallOption) (*Schedule, error) {
-	out := new(Schedule)
+func (c *scheduleServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+	out := new(CreateResponse)
 	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -359,8 +794,8 @@ func (c *scheduleServiceClient) Create(ctx context.Context, in *Schedule, opts .
 	return out, nil
 }
 
-func (c *scheduleServiceClient) Update(ctx context.Context, in *Schedule, opts ...grpc.CallOption) (*Schedule, error) {
-	out := new(Schedule)
+func (c *scheduleServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateResponse, error) {
+	out := new(UpdateResponse)
 	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -368,9 +803,9 @@ func (c *scheduleServiceClient) Update(ctx context.Context, in *Schedule, opts .
 	return out, nil
 }
 
-func (c *scheduleServiceClient) Remove(ctx context.Context, in *ID, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/remove", in, out, opts...)
+func (c *scheduleServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+	out := new(DeleteResponse)
+	err := c.cc.Invoke(ctx, "/schedule.ScheduleService/delete", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -379,60 +814,57 @@ func (c *scheduleServiceClient) Remove(ctx context.Context, in *ID, opts ...grpc
 
 // ScheduleServiceServer is the server API for ScheduleService service.
 type ScheduleServiceServer interface {
-	Index(*emptypb.Empty, ScheduleService_IndexServer) error
-	Show(context.Context, *ID) (*Schedule, error)
-	Create(context.Context, *Schedule) (*Schedule, error)
-	Update(context.Context, *Schedule) (*Schedule, error)
-	Remove(context.Context, *ID) (*emptypb.Empty, error)
+	Index(context.Context, *IndexRequest) (*IndexResponse, error)
+	Show(context.Context, *ShowRequest) (*ShowResponse, error)
+	Create(context.Context, *CreateRequest) (*CreateResponse, error)
+	Update(context.Context, *UpdateRequest) (*UpdateResponse, error)
+	Delete(context.Context, *DeleteRequest) (*DeleteResponse, error)
 }
 
 // UnimplementedScheduleServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedScheduleServiceServer struct {
 }
 
-func (*UnimplementedScheduleServiceServer) Index(*emptypb.Empty, ScheduleService_IndexServer) error {
-	return status.Errorf(codes.Unimplemented, "method Index not implemented")
+func (*UnimplementedScheduleServiceServer) Index(context.Context, *IndexRequest) (*IndexResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Index not implemented")
 }
-func (*UnimplementedScheduleServiceServer) Show(context.Context, *ID) (*Schedule, error) {
+func (*UnimplementedScheduleServiceServer) Show(context.Context, *ShowRequest) (*ShowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Show not implemented")
 }
-func (*UnimplementedScheduleServiceServer) Create(context.Context, *Schedule) (*Schedule, error) {
+func (*UnimplementedScheduleServiceServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (*UnimplementedScheduleServiceServer) Update(context.Context, *Schedule) (*Schedule, error) {
+func (*UnimplementedScheduleServiceServer) Update(context.Context, *UpdateRequest) (*UpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (*UnimplementedScheduleServiceServer) Remove(context.Context, *ID) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
+func (*UnimplementedScheduleServiceServer) Delete(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 
 func RegisterScheduleServiceServer(s *grpc.Server, srv ScheduleServiceServer) {
 	s.RegisterService(&_ScheduleService_serviceDesc, srv)
 }
 
-func _ScheduleService_Index_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(emptypb.Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _ScheduleService_Index_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(ScheduleServiceServer).Index(m, &scheduleServiceIndexServer{stream})
-}
-
-type ScheduleService_IndexServer interface {
-	Send(*Schedule) error
-	grpc.ServerStream
-}
-
-type scheduleServiceIndexServer struct {
-	grpc.ServerStream
-}
-
-func (x *scheduleServiceIndexServer) Send(m *Schedule) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(ScheduleServiceServer).Index(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/schedule.ScheduleService/Index",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScheduleServiceServer).Index(ctx, req.(*IndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ScheduleService_Show_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ID)
+	in := new(ShowRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -444,13 +876,13 @@ func _ScheduleService_Show_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/schedule.ScheduleService/Show",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScheduleServiceServer).Show(ctx, req.(*ID))
+		return srv.(ScheduleServiceServer).Show(ctx, req.(*ShowRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ScheduleService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Schedule)
+	in := new(CreateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -462,13 +894,13 @@ func _ScheduleService_Create_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/schedule.ScheduleService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScheduleServiceServer).Create(ctx, req.(*Schedule))
+		return srv.(ScheduleServiceServer).Create(ctx, req.(*CreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ScheduleService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Schedule)
+	in := new(UpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -480,25 +912,25 @@ func _ScheduleService_Update_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/schedule.ScheduleService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScheduleServiceServer).Update(ctx, req.(*Schedule))
+		return srv.(ScheduleServiceServer).Update(ctx, req.(*UpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ScheduleService_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ID)
+func _ScheduleService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ScheduleServiceServer).Remove(ctx, in)
+		return srv.(ScheduleServiceServer).Delete(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/schedule.ScheduleService/Remove",
+		FullMethod: "/schedule.ScheduleService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScheduleServiceServer).Remove(ctx, req.(*ID))
+		return srv.(ScheduleServiceServer).Delete(ctx, req.(*DeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -507,6 +939,10 @@ var _ScheduleService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "schedule.ScheduleService",
 	HandlerType: (*ScheduleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "index",
+			Handler:    _ScheduleService_Index_Handler,
+		},
 		{
 			MethodName: "show",
 			Handler:    _ScheduleService_Show_Handler,
@@ -520,16 +956,10 @@ var _ScheduleService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ScheduleService_Update_Handler,
 		},
 		{
-			MethodName: "remove",
-			Handler:    _ScheduleService_Remove_Handler,
+			MethodName: "delete",
+			Handler:    _ScheduleService_Delete_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "index",
-			Handler:       _ScheduleService_Index_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "schedule.proto",
 }

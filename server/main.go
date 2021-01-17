@@ -1,5 +1,25 @@
 package main
 
-func main() {
+import (
+	"net"
+	"server/pb"
+	"server/schedule"
 
+	log "github.com/sirupsen/logrus"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+)
+
+func main() {
+	lis, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+	}
+	s := grpc.NewServer()
+	server := &schedule.Server{}
+	pb.RegisterScheduleServiceServer(s, server)
+	reflection.Register(s)
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("Failed to serve: %v", err)
+	}
 }

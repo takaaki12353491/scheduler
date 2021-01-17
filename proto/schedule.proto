@@ -1,17 +1,16 @@
 syntax = "proto3";
 
-import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 package schedule;
 option go_package = ".;pb";
 
 service ScheduleService {
-  rpc index (google.protobuf.Empty) returns (stream Schedule) {}
-  rpc show (ID) returns (Schedule) {}
-  rpc create (Schedule) returns (Schedule) {}
-  rpc update (Schedule) returns (Schedule) {}
-  rpc remove (ID) returns (google.protobuf.Empty) {}
+  rpc index (IndexRequest) returns (IndexResponse) {}
+  rpc show (ShowRequest) returns (ShowResponse) {}
+  rpc create (CreateRequest) returns (CreateResponse) {}
+  rpc update (UpdateRequest) returns (UpdateResponse) {}
+  rpc delete (DeleteRequest) returns (DeleteResponse) {}
 }
 
 message Schedule {
@@ -22,6 +21,13 @@ message Schedule {
   string location = 5;
 }
 
-message ID {
-  string id = 1;
-}
+message IndexRequest {}
+message IndexResponse {}
+message ShowRequest {}
+message ShowResponse {}
+message CreateRequest {}
+message CreateResponse {}
+message UpdateRequest {}
+message UpdateResponse {}
+message DeleteRequest {}
+message DeleteResponse {}
