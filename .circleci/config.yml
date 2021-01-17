@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Vendoring
           command: go mod download
-          ## working_directory: ./server
+          working_directory: ./server
       - save_cache:
           name: Save go modules cache
           key: v1-mod-{{ .Branch }}-{{ checksum "./server/go.mod" }}
@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Test go package
           command: go test -v ./...
-          ## working_directory: ./server
+          working_directory: ./server
   client:
     docker:
       - image: circleci/node:12.18.4
