@@ -24,6 +24,7 @@ jobs:
       - run:
           name: Test go package
           command: go test -v ./...
+          working_directory: ./server
   client:
     docker:
       - image: circleci/node:12.18.4
