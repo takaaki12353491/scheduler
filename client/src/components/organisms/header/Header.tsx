@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IconButton, Toolbar, Typography, makeStyles } from '@material-ui/core'
 import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons'
 import DehazeIcon from '@material-ui/icons/Dehaze'
-import { KeyboardDatePicker } from '@material-ui/pickers'
 import dayjs from 'dayjs'
 import dateSlice from '../../../redux/slices/date'
 
@@ -17,9 +16,6 @@ const Header = () => {
   }
   const handleNext = () => {
     dispatch(actions.nextMonth())
-  }
-  const handleSelect = (date: dayjs.Dayjs | null) => {
-    date && dispatch(actions.setMonth(date))
   }
   return (
     <Toolbar className={classes.container}>
