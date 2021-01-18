@@ -1,28 +1,29 @@
 import React from 'react'
-import { Schedule } from '../../../pb/schedule_pb'
-import { Typography, makeStyles } from '@material-ui/core'
 import dayjs from 'dayjs'
+import { Schedule } from '../../../pb/schedule_pb'
+import { useSelector } from 'react-redux'
+import { Typography, makeStyles } from '@material-ui/core'
 import { isSameMonth, isFirstDay, isSameDay } from '../../../modules/calendar'
 import border from '../../../styles/border'
 
 type Props = {
   day: dayjs.Dayjs
-  date: dayjs.Dayjs
   schedules: Schedule.AsObject[]
+  openDialog: () => void
 }
 
-const Element: React.FC<Props> = ({ day, date, schedules }) => {
+const Element: React.FC<Props> = ({ day, schedules, openDialog }) => {
   const classes = useStyles()
+  const date = useSelector(state => state.date)
   const today = dayjs()
   const format = isFirstDay(day) ? 'M月D日' : 'D'
   const isToday = isSameDay(day, today)
   const isCurrentMonth = isSameMonth(day, date)
-  const textColor = isCurrentMonth ? 'textPrimary' : 'textSecondary'
   return (
     <div className={classes.element}>
       <Typography
         className={classes.date}
-        color={textColor}
+        color={isCurrentMonth ? 'textPrimary' : 'textSecondary'}
         align='center'
         variant='caption'
         component='div'
@@ -32,7 +33,16 @@ const Element: React.FC<Props> = ({ day, date, schedules }) => {
         </span>
         <div className={classes.schedules}>
           {schedules.map(schedule => (
-            <div key={schedule.id} className={classes.schedule}>{schedule.title}</div>
+            <div 
+              key={schedule.id}
+              className={classes.schedule}
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation()
+                openDialog()
+              }}
+            >
+              {schedule.title}
+            </div>
           ))}
         </div>
       </Typography>

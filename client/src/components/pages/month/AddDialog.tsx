@@ -17,8 +17,8 @@ import {
   NotesOutlined,
   AccessTime,
   Close,
-} from "@material-ui/icons"
-import { DatePicker } from "@material-ui/pickers"
+} from '@material-ui/icons'
+import { DatePicker } from '@material-ui/pickers'
 import dayjs from 'dayjs'
 import { dateToTimestamp, timestampToDate } from '../../../modules/calendar'
 
@@ -27,7 +27,7 @@ type Props = {
   close: () => void
 }
 
-const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
+const AddDialog: React.FC<Props> = ({ isOpen, close }) => {
   const classes = useStyles()
   const schedule = useSelector(state => state.schedule)
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
       <DialogContent>
         <DialogActions>
           <div className={classes.closeButton}>
-            <IconButton onClick={close} size="small">
+            <IconButton onClick={close} size='small'>
               <Close />
             </IconButton>
           </div>
@@ -46,11 +46,11 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
           className={classes.title} 
           autoFocus 
           fullWidth 
-          placeholder="タイトルと日時を追加"
+          placeholder='タイトルと日時を追加'
           value={schedule.title}
           onChange={e => dispatch(actions.set({...schedule, title: e.target.value}))}
         />
-        <Grid container spacing={1} alignItems="center" justify="space-between">
+        <Grid container spacing={1} alignItems='center' justify='space-between'>
           <Grid item>
             <AccessTime />
           </Grid>
@@ -62,8 +62,8 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
                   ...schedule, date: dateToTimestamp(date)
                 }))
               }}
-              variant="inline"
-              format="YYYY年M月D日"
+              variant='inline'
+              format='YYYY年M月D日'
               animateYearScrolling
               disableToolbar
               fullWidth
@@ -71,7 +71,7 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1} alignItems="center" justify="space-between">
+        <Grid container spacing={1} alignItems='center' justify='space-between'>
           <Grid item>
             <LocationOnOutlined />
           </Grid>
@@ -79,13 +79,13 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
             <TextField 
               className={classes.spacer} 
               fullWidth 
-              placeholder="場所を追加"
+              placeholder='場所を追加'
               value={schedule.location}
               onChange={e => dispatch(actions.set({...schedule, location: e.target.value}))}
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1} alignItems="center" justify="space-between">
+        <Grid container spacing={1} alignItems='center' justify='space-between'>
           <Grid item>
             <NotesOutlined />
           </Grid>
@@ -93,7 +93,7 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
             <TextField 
               className={classes.spacer} 
               fullWidth 
-              placeholder="説明を追加"
+              placeholder='説明を追加'
               value={schedule.description}
               onChange={e => dispatch(actions.set({...schedule, description: e.target.value}))}
             />
@@ -101,7 +101,7 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button color="primary" variant="outlined" onClick={() => {
+        <Button color='primary' variant='outlined' onClick={() => {
           dispatch(schedulesSlice.actions.add(schedule))
           close()
         }}>
@@ -111,17 +111,17 @@ const AddScheduleDialog: React.FC<Props> = ({ isOpen, close }) => {
     </Dialog>
   )
 }
-export default AddScheduleDialog
+export default AddDialog
 
 const useStyles = makeStyles(theme => ({
   closeButton: {
-    textAlign: "right",
+    textAlign: 'right',
   },
   title: {
     marginBottom: 32, 
     fontSize: 22,
   },
   spacer: {
-    margin: "4px 0",
+    margin: '4px 0',
   }
 }))

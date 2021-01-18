@@ -1,27 +1,29 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { scheduleSlice } from '../../../redux/slices'
+import { Schedule } from '../../../pb/schedule_pb'
 import { GridList, Typography, makeStyles } from '@material-ui/core'
 import Base from '../../templates/base/Base'
+import AddDialog from './AddDialog'
+import DetailDialog from './DetailDialog'
 import Element from './Element'
-import AddScheduleDialog from './AddScheduleDialog'
-import { getDays } from '../../../modules/calendar'
+import { getDays, dateToTimestamp } from '../../../modules/calendar'
 import { setSchedules } from '../../../modules/schedule'
-import { dateToTimestamp } from '../../../modules/calendar'
 import border from '../../../styles/border'
 
 const Month: React.FC = () => {
   const classes = useStyles()
-  const [ isDialogOpen, setIsDialogOpen ] = React.useState(false)
+  const [ isAddDialogOpen, setIsAddDialogOpen ] = React.useState(false)
+  const [ isDetailDialogOpen, setIsDetailDialogOpen ] = React.useState(false)
   const date = useSelector(state => state.date)
-  const schedule = useSelector(state => state.schedule)
   const schedules = useSelector(state => state.schedules)
   const dispatch = useDispatch()
   const { actions } = scheduleSlice
   const days = setSchedules(getDays(date), schedules)
   return (
     <Base>
-      <AddScheduleDialog isOpen={isDialogOpen} close={() => setIsDialogOpen(false)}/>
+      <AddDialog isOpen={isAddDialogOpen} close={() => setIsAddDialogOpen(false)}/>
+      <DetailDialog isOpen={isDetailDialogOpen} close={() => setIsDetailDialogOpen(false)}/>
       <div className={classes.container}>
         <GridList className={classes.grid} cols={7} spacing={0} cellHeight='auto'>
           {['日', '月', '火', '水', '木', '金', '土'].map(d => (
@@ -41,11 +43,17 @@ const Month: React.FC = () => {
             <li 
               key={day.toISOString()} 
               onClick={() => {
-                dispatch(actions.set({ ...schedule, date: dateToTimestamp(day) }))
-                setIsDialogOpen(true)
+                const schedule = new Schedule().toObject()
+                schedule.date = dateToTimestamp(day)
+                dispatch(actions.set(schedule))
+                setIsAddDialogOpen(true)
               }}
             >
-              <Element day={day} date={date} schedules={schedules}/>
+              <Element 
+                day={day} 
+                schedules={schedules}
+                openDialog={() => setIsDetailDialogOpen(true)}
+              />
             </li>
           ))}
         </GridList>
