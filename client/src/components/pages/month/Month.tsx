@@ -41,8 +41,7 @@ const Month = () => {
             <li 
               key={c.toISOString()} 
               onClick={() => {
-                const timestamp = dateToTimestamp(c)
-                dispatch(actions.set({ ...schedule, date: timestamp.toObject() }))
+                dispatch(actions.set({ ...schedule, date: dateToTimestamp(c) }))
                 setIsDialogOpen(true)
               }}
             >

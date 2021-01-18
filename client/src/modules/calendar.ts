@@ -29,12 +29,11 @@ const getMonthStateCreator = (diff: number) => (date: dayjs.Dayjs) => date.add(d
 export const getNextMonth = getMonthStateCreator(1)
 export const getPreviousMonth = getMonthStateCreator(-1)
 
-export const dateToTimestamp = (date: dayjs.Dayjs) => {
-  const timestamp = new google_protobuf_timestamp_pb.Timestamp()
-  date && timestamp.fromDate(date.toDate())
-  return timestamp
-}
+export const dateToTimestamp = (date: dayjs.Dayjs): google_protobuf_timestamp_pb.Timestamp.AsObject => ({
+  seconds: date.unix(),
+  nanos: 0,
+})
 
-export const timestampObjToDate = (timestamp: google_protobuf_timestamp_pb.Timestamp.AsObject) => {
-  return dayjs(new Date(timestamp.seconds * 1000))
+export const timestampToDate = (timestamp: google_protobuf_timestamp_pb.Timestamp.AsObject) => {
+  return dayjs(timestamp.seconds * 1000)
 }

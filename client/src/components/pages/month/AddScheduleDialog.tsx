@@ -20,7 +20,7 @@ import {
 } from "@material-ui/icons"
 import { DatePicker } from "@material-ui/pickers"
 import dayjs from 'dayjs'
-import { dateToTimestamp, timestampObjToDate } from '../../../modules/calendar'
+import { dateToTimestamp, timestampToDate } from '../../../modules/calendar'
 
 type Props = {
   isOpen: boolean
@@ -56,11 +56,11 @@ const AddScheduleDialog = ({ isOpen, close }: Props) => {
           </Grid>
           <Grid item xs={10}>
             <DatePicker
-              value={schedule.date ? timestampObjToDate(schedule.date) : dayjs()}
-              onChange={date => {
-                if (!date) return 
-                const timestamp = dateToTimestamp(date)
-                dispatch(actions.set({ ...schedule, date: timestamp.toObject() }))
+              value={schedule.date ? timestampToDate(schedule.date) : dayjs()}
+              onChange={date => {              
+                date && dispatch(actions.set({ 
+                  ...schedule, date: dateToTimestamp(date)
+                }))
               }}
               variant="inline"
               format="YYYY年M月D日"
