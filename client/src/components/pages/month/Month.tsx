@@ -5,26 +5,26 @@ import { GridList, Typography, makeStyles } from '@material-ui/core'
 import Base from '../../templates/base/Base'
 import Element from './Element'
 import AddScheduleDialog from './AddScheduleDialog'
-import { createCalendar } from '../../../modules/calendar'
-import border from '../../../styles/border'
+import { getDays } from '../../../modules/calendar'
+import { setSchedules } from '../../../modules/schedule'
 import { dateToTimestamp } from '../../../modules/calendar'
+import border from '../../../styles/border'
 
-const days = ['日', '月', '火', '水', '木', '金', '土']
-
-const Month = () => {
+const Month: React.FC = () => {
   const classes = useStyles()
   const [ isDialogOpen, setIsDialogOpen ] = React.useState(false)
   const date = useSelector(state => state.date)
   const schedule = useSelector(state => state.schedule)
+  const schedules = useSelector(state => state.schedules)
   const dispatch = useDispatch()
   const { actions } = scheduleSlice
-  const calendar = createCalendar(date)
+  const days = setSchedules(getDays(date), schedules)
   return (
     <Base>
       <AddScheduleDialog isOpen={isDialogOpen} close={() => setIsDialogOpen(false)}/>
       <div className={classes.container}>
         <GridList className={classes.grid} cols={7} spacing={0} cellHeight='auto'>
-          {days.map(d => (
+          {['日', '月', '火', '水', '木', '金', '土'].map(d => (
             <li key={d}>
             <Typography
               className={classes.days}
@@ -37,15 +37,15 @@ const Month = () => {
             </Typography>
           </li>
           ))}
-          {calendar.map(c => (
+          {days.map(({ day, schedules }) => (
             <li 
-              key={c.toISOString()} 
+              key={day.toISOString()} 
               onClick={() => {
-                dispatch(actions.set({ ...schedule, date: dateToTimestamp(c) }))
+                dispatch(actions.set({ ...schedule, date: dateToTimestamp(day) }))
                 setIsDialogOpen(true)
               }}
             >
-              <Element day={c} date={date}/>
+              <Element day={day} date={date} schedules={schedules}/>
             </li>
           ))}
         </GridList>

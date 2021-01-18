@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb'
 
-export const createCalendar = (date: dayjs.Dayjs) => {
+export const getDays = (date: dayjs.Dayjs) => {
   const month = date.date(1)
   const firstDayIndex = month.day()
 

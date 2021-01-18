@@ -5,7 +5,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons'
 import DehazeIcon from '@material-ui/icons/Dehaze'
 import dateSlice from '../../../redux/slices/date'
 
-const Header = () => {
+const Header: React.FC = () => {
   const classes = useStyles()
   const date = useSelector(state => state.date)
   const dispatch = useDispatch()
