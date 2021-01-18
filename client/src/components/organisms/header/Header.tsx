@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IconButton, Toolbar, Typography, makeStyles } from '@material-ui/core'
 import { ArrowBackIos, ArrowForwardIos } from '@material-ui/icons'
 import DehazeIcon from '@material-ui/icons/Dehaze'
-import dayjs from 'dayjs'
 import dateSlice from '../../../redux/slices/date'
 
 const Header = () => {
@@ -11,12 +10,6 @@ const Header = () => {
   const date = useSelector(state => state.date)
   const dispatch = useDispatch()
   const { actions } = dateSlice
-  const handlePrevious = () => {
-    dispatch(actions.previousMonth())
-  }
-  const handleNext = () => {
-    dispatch(actions.nextMonth())
-  }
   return (
     <Toolbar className={classes.container}>
       <IconButton>
@@ -26,10 +19,10 @@ const Header = () => {
       <Typography className={classes.title} color='textSecondary' variant='h5' component='h1'>
         カレンダー
       </Typography>
-      <IconButton size='small' onClick={handlePrevious}>
+      <IconButton size='small' onClick={() => dispatch(actions.previousMonth())}>
         <ArrowBackIos />
       </IconButton>
-      <IconButton size='small' onClick={handleNext}>
+      <IconButton size='small' onClick={() => dispatch(actions.nextMonth())}>
         <ArrowForwardIos />
       </IconButton>
       <Typography className={classes.month}>

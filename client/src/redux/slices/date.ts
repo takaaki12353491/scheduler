@@ -4,7 +4,7 @@ import { getPreviousMonth, getNextMonth } from '../../modules/calendar'
 
 const today = dayjs()
 
-const dateSlice = createSlice({
+export const dateSlice = createSlice({
   name: 'date',
   initialState: today,
   reducers: {

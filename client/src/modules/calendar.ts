@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb'
 
 export const createCalendar = (date: dayjs.Dayjs) => {
   const month = date.date(1)
@@ -27,3 +28,13 @@ const getMonthStateCreator = (diff: number) => (date: dayjs.Dayjs) => date.add(d
 
 export const getNextMonth = getMonthStateCreator(1)
 export const getPreviousMonth = getMonthStateCreator(-1)
+
+export const dateToTimestamp = (date: dayjs.Dayjs) => {
+  const timestamp = new google_protobuf_timestamp_pb.Timestamp()
+  date && timestamp.fromDate(date.toDate())
+  return timestamp
+}
+
+export const timestampObjToDate = (timestamp: google_protobuf_timestamp_pb.Timestamp.AsObject) => {
+  return dayjs(new Date(timestamp.seconds * 1000))
+}

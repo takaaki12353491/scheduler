@@ -4,8 +4,8 @@ import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/t
 
 
 export class Schedule extends jspb.Message {
-  getId(): number;
-  setId(value: number): Schedule;
+  getId(): string;
+  setId(value: string): Schedule;
 
   getTitle(): string;
   setTitle(value: string): Schedule;
@@ -31,7 +31,7 @@ export class Schedule extends jspb.Message {
 
 export namespace Schedule {
   export type AsObject = {
-    id: number,
+    id: string,
     title: string,
     description: string,
     date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
