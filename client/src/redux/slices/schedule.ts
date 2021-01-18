@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import dayjs from 'dayjs'
-import { getPreviousMonth, getNextMonth } from '../../modules/calendar'
+import { Schedule }  from '../../pb/schedule_pb'
 
-const today = dayjs()
+const schedule: Schedule.AsObject = {
+  id: "",
+  title: "",
+  description: "",
+  date: undefined,
+  location: "",
+}
 
-const dateSlice = createSlice({
+export const scheduleSlice = createSlice({
   name: 'schedule',
-  initialState: today,
+  initialState: schedule,
   reducers: {
-    setMonth: (_, action: PayloadAction<dayjs.Dayjs>) => action.payload,
-    previousMonth: state => getPreviousMonth(state),
-    nextMonth: state => getNextMonth(state),
-  }
+    set: (_, action: PayloadAction<Schedule.AsObject>) => action.payload,
+  },
 })
-export default dateSlice
+export default scheduleSlice
