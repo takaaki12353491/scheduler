@@ -40,6 +40,9 @@ export namespace Schedule {
 }
 
 export class IndexRequest extends jspb.Message {
+  getMonth(): number;
+  setMonth(value: number): IndexRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): IndexRequest.AsObject;
   static toObject(includeInstance: boolean, msg: IndexRequest): IndexRequest.AsObject;
@@ -50,10 +53,16 @@ export class IndexRequest extends jspb.Message {
 
 export namespace IndexRequest {
   export type AsObject = {
+    month: number,
   }
 }
 
 export class IndexResponse extends jspb.Message {
+  getSchedulesList(): Array<Schedule>;
+  setSchedulesList(value: Array<Schedule>): IndexResponse;
+  clearSchedulesList(): IndexResponse;
+  addSchedules(value?: Schedule, index?: number): Schedule;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): IndexResponse.AsObject;
   static toObject(includeInstance: boolean, msg: IndexResponse): IndexResponse.AsObject;
@@ -64,10 +73,14 @@ export class IndexResponse extends jspb.Message {
 
 export namespace IndexResponse {
   export type AsObject = {
+    schedulesList: Array<Schedule.AsObject>,
   }
 }
 
 export class ShowRequest extends jspb.Message {
+  getId(): string;
+  setId(value: string): ShowRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ShowRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ShowRequest): ShowRequest.AsObject;
@@ -78,10 +91,16 @@ export class ShowRequest extends jspb.Message {
 
 export namespace ShowRequest {
   export type AsObject = {
+    id: string,
   }
 }
 
 export class ShowResponse extends jspb.Message {
+  getSchedule(): Schedule | undefined;
+  setSchedule(value?: Schedule): ShowResponse;
+  hasSchedule(): boolean;
+  clearSchedule(): ShowResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ShowResponse.AsObject;
   static toObject(includeInstance: boolean, msg: ShowResponse): ShowResponse.AsObject;
@@ -92,10 +111,16 @@ export class ShowResponse extends jspb.Message {
 
 export namespace ShowResponse {
   export type AsObject = {
+    schedule?: Schedule.AsObject,
   }
 }
 
 export class CreateRequest extends jspb.Message {
+  getSchedule(): Schedule | undefined;
+  setSchedule(value?: Schedule): CreateRequest;
+  hasSchedule(): boolean;
+  clearSchedule(): CreateRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateRequest.AsObject;
   static toObject(includeInstance: boolean, msg: CreateRequest): CreateRequest.AsObject;
@@ -106,10 +131,16 @@ export class CreateRequest extends jspb.Message {
 
 export namespace CreateRequest {
   export type AsObject = {
+    schedule?: Schedule.AsObject,
   }
 }
 
 export class CreateResponse extends jspb.Message {
+  getSchedule(): Schedule | undefined;
+  setSchedule(value?: Schedule): CreateResponse;
+  hasSchedule(): boolean;
+  clearSchedule(): CreateResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateResponse.AsObject;
   static toObject(includeInstance: boolean, msg: CreateResponse): CreateResponse.AsObject;
@@ -120,10 +151,16 @@ export class CreateResponse extends jspb.Message {
 
 export namespace CreateResponse {
   export type AsObject = {
+    schedule?: Schedule.AsObject,
   }
 }
 
 export class UpdateRequest extends jspb.Message {
+  getSchedule(): Schedule | undefined;
+  setSchedule(value?: Schedule): UpdateRequest;
+  hasSchedule(): boolean;
+  clearSchedule(): UpdateRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateRequest): UpdateRequest.AsObject;
@@ -134,10 +171,16 @@ export class UpdateRequest extends jspb.Message {
 
 export namespace UpdateRequest {
   export type AsObject = {
+    schedule?: Schedule.AsObject,
   }
 }
 
 export class UpdateResponse extends jspb.Message {
+  getSchedule(): Schedule | undefined;
+  setSchedule(value?: Schedule): UpdateResponse;
+  hasSchedule(): boolean;
+  clearSchedule(): UpdateResponse;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateResponse.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateResponse): UpdateResponse.AsObject;
@@ -148,10 +191,14 @@ export class UpdateResponse extends jspb.Message {
 
 export namespace UpdateResponse {
   export type AsObject = {
+    schedule?: Schedule.AsObject,
   }
 }
 
 export class DeleteRequest extends jspb.Message {
+  getId(): string;
+  setId(value: string): DeleteRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeleteRequest.AsObject;
   static toObject(includeInstance: boolean, msg: DeleteRequest): DeleteRequest.AsObject;
@@ -162,6 +209,7 @@ export class DeleteRequest extends jspb.Message {
 
 export namespace DeleteRequest {
   export type AsObject = {
+    id: string,
   }
 }
 

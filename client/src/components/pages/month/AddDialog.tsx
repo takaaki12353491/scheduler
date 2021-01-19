@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { scheduleSlice, schedulesSlice } from '../../../redux/slices'
+import { scheduleSlice, schedulesSlice, createSchedule } from '../../../redux/slices'
 import { 
   Dialog, 
   DialogContent,
@@ -102,7 +102,7 @@ const AddDialog: React.FC<Props> = ({ isOpen, close }) => {
       </DialogContent>
       <DialogActions>
         <Button color='primary' variant='outlined' onClick={() => {
-          dispatch(schedulesSlice.actions.add(schedule))
+          dispatch(createSchedule(schedule))
           close()
         }}>
           保存

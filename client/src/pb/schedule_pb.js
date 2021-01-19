@@ -80,7 +80,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.schedule.IndexResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.schedule.IndexResponse.repeatedFields_, null);
 };
 goog.inherits(proto.schedule.IndexResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -561,7 +561,7 @@ proto.schedule.IndexRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.schedule.IndexRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    month: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -598,6 +598,10 @@ proto.schedule.IndexRequest.deserializeBinaryFromReader = function(msg, reader) 
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setMonth(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -627,9 +631,41 @@ proto.schedule.IndexRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.IndexRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getMonth();
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
 };
 
 
+/**
+ * optional int32 month = 1;
+ * @return {number}
+ */
+proto.schedule.IndexRequest.prototype.getMonth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.schedule.IndexRequest} returns this
+ */
+proto.schedule.IndexRequest.prototype.setMonth = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.schedule.IndexResponse.repeatedFields_ = [1];
 
 
 
@@ -662,7 +698,8 @@ proto.schedule.IndexResponse.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.IndexResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedulesList: jspb.Message.toObjectList(msg.getSchedulesList(),
+    proto.schedule.Schedule.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -699,6 +736,11 @@ proto.schedule.IndexResponse.deserializeBinaryFromReader = function(msg, reader)
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.addSchedules(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -728,6 +770,52 @@ proto.schedule.IndexResponse.prototype.serializeBinary = function() {
  */
 proto.schedule.IndexResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedulesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated Schedule schedules = 1;
+ * @return {!Array<!proto.schedule.Schedule>}
+ */
+proto.schedule.IndexResponse.prototype.getSchedulesList = function() {
+  return /** @type{!Array<!proto.schedule.Schedule>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.schedule.Schedule>} value
+ * @return {!proto.schedule.IndexResponse} returns this
+*/
+proto.schedule.IndexResponse.prototype.setSchedulesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.schedule.Schedule=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.schedule.Schedule}
+ */
+proto.schedule.IndexResponse.prototype.addSchedules = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.schedule.Schedule, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.schedule.IndexResponse} returns this
+ */
+proto.schedule.IndexResponse.prototype.clearSchedulesList = function() {
+  return this.setSchedulesList([]);
 };
 
 
@@ -763,7 +851,7 @@ proto.schedule.ShowRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.schedule.ShowRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -800,6 +888,10 @@ proto.schedule.ShowRequest.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -829,6 +921,31 @@ proto.schedule.ShowRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.ShowRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string id = 1;
+ * @return {string}
+ */
+proto.schedule.ShowRequest.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.ShowRequest} returns this
+ */
+proto.schedule.ShowRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -864,7 +981,7 @@ proto.schedule.ShowResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.schedule.ShowResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -901,6 +1018,11 @@ proto.schedule.ShowResponse.deserializeBinaryFromReader = function(msg, reader) 
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.setSchedule(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -930,6 +1052,51 @@ proto.schedule.ShowResponse.prototype.serializeBinary = function() {
  */
 proto.schedule.ShowResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedule();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Schedule schedule = 1;
+ * @return {?proto.schedule.Schedule}
+ */
+proto.schedule.ShowResponse.prototype.getSchedule = function() {
+  return /** @type{?proto.schedule.Schedule} */ (
+    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {?proto.schedule.Schedule|undefined} value
+ * @return {!proto.schedule.ShowResponse} returns this
+*/
+proto.schedule.ShowResponse.prototype.setSchedule = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.schedule.ShowResponse} returns this
+ */
+proto.schedule.ShowResponse.prototype.clearSchedule = function() {
+  return this.setSchedule(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.ShowResponse.prototype.hasSchedule = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -965,7 +1132,7 @@ proto.schedule.CreateRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.CreateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1002,6 +1169,11 @@ proto.schedule.CreateRequest.deserializeBinaryFromReader = function(msg, reader)
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.setSchedule(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1031,6 +1203,51 @@ proto.schedule.CreateRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.CreateRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedule();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Schedule schedule = 1;
+ * @return {?proto.schedule.Schedule}
+ */
+proto.schedule.CreateRequest.prototype.getSchedule = function() {
+  return /** @type{?proto.schedule.Schedule} */ (
+    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {?proto.schedule.Schedule|undefined} value
+ * @return {!proto.schedule.CreateRequest} returns this
+*/
+proto.schedule.CreateRequest.prototype.setSchedule = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.schedule.CreateRequest} returns this
+ */
+proto.schedule.CreateRequest.prototype.clearSchedule = function() {
+  return this.setSchedule(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.CreateRequest.prototype.hasSchedule = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -1066,7 +1283,7 @@ proto.schedule.CreateResponse.prototype.toObject = function(opt_includeInstance)
  */
 proto.schedule.CreateResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1103,6 +1320,11 @@ proto.schedule.CreateResponse.deserializeBinaryFromReader = function(msg, reader
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.setSchedule(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1132,6 +1354,51 @@ proto.schedule.CreateResponse.prototype.serializeBinary = function() {
  */
 proto.schedule.CreateResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedule();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Schedule schedule = 1;
+ * @return {?proto.schedule.Schedule}
+ */
+proto.schedule.CreateResponse.prototype.getSchedule = function() {
+  return /** @type{?proto.schedule.Schedule} */ (
+    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {?proto.schedule.Schedule|undefined} value
+ * @return {!proto.schedule.CreateResponse} returns this
+*/
+proto.schedule.CreateResponse.prototype.setSchedule = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.schedule.CreateResponse} returns this
+ */
+proto.schedule.CreateResponse.prototype.clearSchedule = function() {
+  return this.setSchedule(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.CreateResponse.prototype.hasSchedule = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -1167,7 +1434,7 @@ proto.schedule.UpdateRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.UpdateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1204,6 +1471,11 @@ proto.schedule.UpdateRequest.deserializeBinaryFromReader = function(msg, reader)
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.setSchedule(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1233,6 +1505,51 @@ proto.schedule.UpdateRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.UpdateRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedule();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Schedule schedule = 1;
+ * @return {?proto.schedule.Schedule}
+ */
+proto.schedule.UpdateRequest.prototype.getSchedule = function() {
+  return /** @type{?proto.schedule.Schedule} */ (
+    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {?proto.schedule.Schedule|undefined} value
+ * @return {!proto.schedule.UpdateRequest} returns this
+*/
+proto.schedule.UpdateRequest.prototype.setSchedule = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.schedule.UpdateRequest} returns this
+ */
+proto.schedule.UpdateRequest.prototype.clearSchedule = function() {
+  return this.setSchedule(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.UpdateRequest.prototype.hasSchedule = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -1268,7 +1585,7 @@ proto.schedule.UpdateResponse.prototype.toObject = function(opt_includeInstance)
  */
 proto.schedule.UpdateResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1305,6 +1622,11 @@ proto.schedule.UpdateResponse.deserializeBinaryFromReader = function(msg, reader
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.schedule.Schedule;
+      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
+      msg.setSchedule(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1334,6 +1656,51 @@ proto.schedule.UpdateResponse.prototype.serializeBinary = function() {
  */
 proto.schedule.UpdateResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getSchedule();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.schedule.Schedule.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Schedule schedule = 1;
+ * @return {?proto.schedule.Schedule}
+ */
+proto.schedule.UpdateResponse.prototype.getSchedule = function() {
+  return /** @type{?proto.schedule.Schedule} */ (
+    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+};
+
+
+/**
+ * @param {?proto.schedule.Schedule|undefined} value
+ * @return {!proto.schedule.UpdateResponse} returns this
+*/
+proto.schedule.UpdateResponse.prototype.setSchedule = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.schedule.UpdateResponse} returns this
+ */
+proto.schedule.UpdateResponse.prototype.clearSchedule = function() {
+  return this.setSchedule(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.UpdateResponse.prototype.hasSchedule = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -1369,7 +1736,7 @@ proto.schedule.DeleteRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.DeleteRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    id: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1406,6 +1773,10 @@ proto.schedule.DeleteRequest.deserializeBinaryFromReader = function(msg, reader)
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1435,6 +1806,31 @@ proto.schedule.DeleteRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.DeleteRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string id = 1;
+ * @return {string}
+ */
+proto.schedule.DeleteRequest.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.DeleteRequest} returns this
+ */
+proto.schedule.DeleteRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
