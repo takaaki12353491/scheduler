@@ -33,7 +33,6 @@ jobs:
     executor:
       name: server
     steps:
-      - run: cd api/schedule
       - build_and_test_go
   client:
     docker:
