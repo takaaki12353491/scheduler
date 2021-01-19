@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"schedule/pb"
+	"scheduler/server/pb"
 )
 
 type Server struct {
