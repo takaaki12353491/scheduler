@@ -2,7 +2,7 @@ package main
 
 import (
 	"net"
-	"server/pb"
+	"schedule/pb"
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"

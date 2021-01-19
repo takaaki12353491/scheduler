@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
-	"server/pb"
+	"schedule/pb"
 )
 
 type Server struct {
 	pb.UnimplementedScheduleServiceServer
+	db *ScheduleDB
 }
 
 func (s *Server) Index(ctx context.Context, r *pb.IndexRequest) (*pb.IndexResponse, error) {
