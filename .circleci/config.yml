@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   server:
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/server
     docker:
       - image: circleci/golang:1.14
     environment:
@@ -32,8 +32,8 @@ jobs:
   schedule:
     executor:
       name: server
-    working_directory: ./server/api/schedule
     steps:
+      - run: cd api/schedule
       - build_and_test_go
   client:
     docker:
