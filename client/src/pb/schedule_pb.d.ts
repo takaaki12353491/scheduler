@@ -7,11 +7,11 @@ export class Schedule extends jspb.Message {
   getId(): string;
   setId(value: string): Schedule;
 
+  getUserId(): string;
+  setUserId(value: string): Schedule;
+
   getTitle(): string;
   setTitle(value: string): Schedule;
-
-  getDescription(): string;
-  setDescription(value: string): Schedule;
 
   getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
   setDate(value?: google_protobuf_timestamp_pb.Timestamp): Schedule;
@@ -20,6 +20,9 @@ export class Schedule extends jspb.Message {
 
   getLocation(): string;
   setLocation(value: string): Schedule;
+
+  getDescription(): string;
+  setDescription(value: string): Schedule;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Schedule.AsObject;
@@ -32,10 +35,11 @@ export class Schedule extends jspb.Message {
 export namespace Schedule {
   export type AsObject = {
     id: string,
+    userId: string,
     title: string,
-    description: string,
     date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     location: string,
+    description: string,
   }
 }
 
@@ -116,10 +120,19 @@ export namespace ShowResponse {
 }
 
 export class CreateRequest extends jspb.Message {
-  getSchedule(): Schedule | undefined;
-  setSchedule(value?: Schedule): CreateRequest;
-  hasSchedule(): boolean;
-  clearSchedule(): CreateRequest;
+  getTitle(): string;
+  setTitle(value: string): CreateRequest;
+
+  getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setDate(value?: google_protobuf_timestamp_pb.Timestamp): CreateRequest;
+  hasDate(): boolean;
+  clearDate(): CreateRequest;
+
+  getLocation(): string;
+  setLocation(value: string): CreateRequest;
+
+  getDescription(): string;
+  setDescription(value: string): CreateRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CreateRequest.AsObject;
@@ -131,7 +144,10 @@ export class CreateRequest extends jspb.Message {
 
 export namespace CreateRequest {
   export type AsObject = {
-    schedule?: Schedule.AsObject,
+    title: string,
+    date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    location: string,
+    description: string,
   }
 }
 
@@ -156,10 +172,22 @@ export namespace CreateResponse {
 }
 
 export class UpdateRequest extends jspb.Message {
-  getSchedule(): Schedule | undefined;
-  setSchedule(value?: Schedule): UpdateRequest;
-  hasSchedule(): boolean;
-  clearSchedule(): UpdateRequest;
+  getId(): string;
+  setId(value: string): UpdateRequest;
+
+  getTitle(): string;
+  setTitle(value: string): UpdateRequest;
+
+  getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setDate(value?: google_protobuf_timestamp_pb.Timestamp): UpdateRequest;
+  hasDate(): boolean;
+  clearDate(): UpdateRequest;
+
+  getLocation(): string;
+  setLocation(value: string): UpdateRequest;
+
+  getDescription(): string;
+  setDescription(value: string): UpdateRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateRequest.AsObject;
@@ -171,7 +199,11 @@ export class UpdateRequest extends jspb.Message {
 
 export namespace UpdateRequest {
   export type AsObject = {
-    schedule?: Schedule.AsObject,
+    id: string,
+    title: string,
+    date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    location: string,
+    description: string,
   }
 }
 

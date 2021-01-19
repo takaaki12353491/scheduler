@@ -3,9 +3,10 @@ import { Schedule }  from '../../pb/schedule_pb'
 
 const schedule: Schedule.AsObject = {
   id: "",
+  userId: "",
   title: "",
-  description: "",
   date: undefined,
+  description: "",
   location: "",
 }
 

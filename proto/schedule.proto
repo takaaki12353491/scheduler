@@ -15,19 +15,45 @@ service ScheduleService {
 
 message Schedule {
   string id = 1;
-  string title = 2;
-  string description = 3;
+  string user_id = 2;
+  string title = 3;
   google.protobuf.Timestamp date = 4;
   string location = 5;
+  string description = 6;
 }
 
-message IndexRequest {}
-message IndexResponse {}
-message ShowRequest {}
-message ShowResponse {}
-message CreateRequest {}
-message CreateResponse {}
-message UpdateRequest {}
-message UpdateResponse {}
-message DeleteRequest {}
+message IndexRequest {
+  int32 month = 1;
+}
+message IndexResponse {
+  repeated Schedule schedules = 1;
+}
+message ShowRequest {
+  string id = 1;
+}
+message ShowResponse {
+  Schedule schedule = 1;
+}
+message CreateRequest {
+  string title = 1;
+  google.protobuf.Timestamp date = 2;
+  string location = 3;
+  string description = 4;
+}
+message CreateResponse {
+  Schedule schedule = 1;
+}
+message UpdateRequest {
+  string id = 1;
+  string title = 2;
+  google.protobuf.Timestamp date = 3;
+  string location = 4;
+  string description = 5;
+}
+message UpdateResponse {
+  Schedule schedule = 1;
+}
+message DeleteRequest {
+  string id = 1;
+}
 message DeleteResponse {}

@@ -15,15 +15,13 @@ export const createSchedule = createAsyncThunk<
   }
 >('schedule/create', async (obj, thunkApi) => {
     const request = new CreateRequest()
-    const schedule = new Schedule()
     const date = new google_protobuf_timestamp_pb.Timestamp()
     obj.date && date.setSeconds(obj.date.seconds)
-    schedule
-      .setId(obj.id)
-      .setTitle(obj.id)
-      .setDescription(obj.id)
+    request
+      .setTitle(obj.title)
       .setDate(date)
       .setLocation(obj.location)
+      .setDescription(obj.description)
     const client = new ScheduleServiceClient(URL ? URL : '')
     const response = await client.create(request, {})
     return response.getSchedule()?.toObject()

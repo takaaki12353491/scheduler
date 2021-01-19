@@ -291,10 +291,11 @@ proto.schedule.Schedule.prototype.toObject = function(opt_includeInstance) {
 proto.schedule.Schedule.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    title: jspb.Message.getFieldWithDefault(msg, 3, ""),
     date: (f = msg.getDate()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    location: jspb.Message.getFieldWithDefault(msg, 5, "")
+    location: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -337,11 +338,11 @@ proto.schedule.Schedule.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTitle(value);
+      msg.setUserId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setDescription(value);
+      msg.setTitle(value);
       break;
     case 4:
       var value = new google_protobuf_timestamp_pb.Timestamp;
@@ -351,6 +352,10 @@ proto.schedule.Schedule.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setLocation(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     default:
       reader.skipField();
@@ -388,14 +393,14 @@ proto.schedule.Schedule.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTitle();
+  f = message.getUserId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getDescription();
+  f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -414,6 +419,13 @@ proto.schedule.Schedule.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -439,10 +451,10 @@ proto.schedule.Schedule.prototype.setId = function(value) {
 
 
 /**
- * optional string title = 2;
+ * optional string user_id = 2;
  * @return {string}
  */
-proto.schedule.Schedule.prototype.getTitle = function() {
+proto.schedule.Schedule.prototype.getUserId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -451,16 +463,16 @@ proto.schedule.Schedule.prototype.getTitle = function() {
  * @param {string} value
  * @return {!proto.schedule.Schedule} returns this
  */
-proto.schedule.Schedule.prototype.setTitle = function(value) {
+proto.schedule.Schedule.prototype.setUserId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string description = 3;
+ * optional string title = 3;
  * @return {string}
  */
-proto.schedule.Schedule.prototype.getDescription = function() {
+proto.schedule.Schedule.prototype.getTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -469,7 +481,7 @@ proto.schedule.Schedule.prototype.getDescription = function() {
  * @param {string} value
  * @return {!proto.schedule.Schedule} returns this
  */
-proto.schedule.Schedule.prototype.setDescription = function(value) {
+proto.schedule.Schedule.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -526,6 +538,24 @@ proto.schedule.Schedule.prototype.getLocation = function() {
  */
 proto.schedule.Schedule.prototype.setLocation = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string description = 6;
+ * @return {string}
+ */
+proto.schedule.Schedule.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.Schedule} returns this
+ */
+proto.schedule.Schedule.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -1132,7 +1162,10 @@ proto.schedule.CreateRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.CreateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
+    title: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    date: (f = msg.getDate()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    location: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -1170,9 +1203,21 @@ proto.schedule.CreateRequest.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.schedule.Schedule;
-      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
-      msg.setSchedule(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTitle(value);
+      break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setDate(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLocation(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     default:
       reader.skipField();
@@ -1203,33 +1248,72 @@ proto.schedule.CreateRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.CreateRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getSchedule();
+  f = message.getTitle();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getDate();
   if (f != null) {
     writer.writeMessage(
-      1,
+      2,
       f,
-      proto.schedule.Schedule.serializeBinaryToWriter
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getLocation();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
     );
   }
 };
 
 
 /**
- * optional Schedule schedule = 1;
- * @return {?proto.schedule.Schedule}
+ * optional string title = 1;
+ * @return {string}
  */
-proto.schedule.CreateRequest.prototype.getSchedule = function() {
-  return /** @type{?proto.schedule.Schedule} */ (
-    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+proto.schedule.CreateRequest.prototype.getTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {?proto.schedule.Schedule|undefined} value
+ * @param {string} value
+ * @return {!proto.schedule.CreateRequest} returns this
+ */
+proto.schedule.CreateRequest.prototype.setTitle = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp date = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.schedule.CreateRequest.prototype.getDate = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.schedule.CreateRequest} returns this
 */
-proto.schedule.CreateRequest.prototype.setSchedule = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+proto.schedule.CreateRequest.prototype.setDate = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
@@ -1237,8 +1321,8 @@ proto.schedule.CreateRequest.prototype.setSchedule = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.schedule.CreateRequest} returns this
  */
-proto.schedule.CreateRequest.prototype.clearSchedule = function() {
-  return this.setSchedule(undefined);
+proto.schedule.CreateRequest.prototype.clearDate = function() {
+  return this.setDate(undefined);
 };
 
 
@@ -1246,8 +1330,44 @@ proto.schedule.CreateRequest.prototype.clearSchedule = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.schedule.CreateRequest.prototype.hasSchedule = function() {
-  return jspb.Message.getField(this, 1) != null;
+proto.schedule.CreateRequest.prototype.hasDate = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string location = 3;
+ * @return {string}
+ */
+proto.schedule.CreateRequest.prototype.getLocation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.CreateRequest} returns this
+ */
+proto.schedule.CreateRequest.prototype.setLocation = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string description = 4;
+ * @return {string}
+ */
+proto.schedule.CreateRequest.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.CreateRequest} returns this
+ */
+proto.schedule.CreateRequest.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -1434,7 +1554,11 @@ proto.schedule.UpdateRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.schedule.UpdateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    schedule: (f = msg.getSchedule()) && proto.schedule.Schedule.toObject(includeInstance, f)
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    date: (f = msg.getDate()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    location: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -1472,9 +1596,25 @@ proto.schedule.UpdateRequest.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.schedule.Schedule;
-      reader.readMessage(value,proto.schedule.Schedule.deserializeBinaryFromReader);
-      msg.setSchedule(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTitle(value);
+      break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setDate(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLocation(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
       break;
     default:
       reader.skipField();
@@ -1505,33 +1645,97 @@ proto.schedule.UpdateRequest.prototype.serializeBinary = function() {
  */
 proto.schedule.UpdateRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getSchedule();
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getTitle();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getDate();
   if (f != null) {
     writer.writeMessage(
-      1,
+      3,
       f,
-      proto.schedule.Schedule.serializeBinaryToWriter
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getLocation();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
     );
   }
 };
 
 
 /**
- * optional Schedule schedule = 1;
- * @return {?proto.schedule.Schedule}
+ * optional string id = 1;
+ * @return {string}
  */
-proto.schedule.UpdateRequest.prototype.getSchedule = function() {
-  return /** @type{?proto.schedule.Schedule} */ (
-    jspb.Message.getWrapperField(this, proto.schedule.Schedule, 1));
+proto.schedule.UpdateRequest.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {?proto.schedule.Schedule|undefined} value
+ * @param {string} value
+ * @return {!proto.schedule.UpdateRequest} returns this
+ */
+proto.schedule.UpdateRequest.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string title = 2;
+ * @return {string}
+ */
+proto.schedule.UpdateRequest.prototype.getTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.UpdateRequest} returns this
+ */
+proto.schedule.UpdateRequest.prototype.setTitle = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp date = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.schedule.UpdateRequest.prototype.getDate = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.schedule.UpdateRequest} returns this
 */
-proto.schedule.UpdateRequest.prototype.setSchedule = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+proto.schedule.UpdateRequest.prototype.setDate = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -1539,8 +1743,8 @@ proto.schedule.UpdateRequest.prototype.setSchedule = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.schedule.UpdateRequest} returns this
  */
-proto.schedule.UpdateRequest.prototype.clearSchedule = function() {
-  return this.setSchedule(undefined);
+proto.schedule.UpdateRequest.prototype.clearDate = function() {
+  return this.setDate(undefined);
 };
 
 
@@ -1548,8 +1752,44 @@ proto.schedule.UpdateRequest.prototype.clearSchedule = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.schedule.UpdateRequest.prototype.hasSchedule = function() {
-  return jspb.Message.getField(this, 1) != null;
+proto.schedule.UpdateRequest.prototype.hasDate = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string location = 4;
+ * @return {string}
+ */
+proto.schedule.UpdateRequest.prototype.getLocation = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.UpdateRequest} returns this
+ */
+proto.schedule.UpdateRequest.prototype.setLocation = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string description = 5;
+ * @return {string}
+ */
+proto.schedule.UpdateRequest.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.schedule.UpdateRequest} returns this
+ */
+proto.schedule.UpdateRequest.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
