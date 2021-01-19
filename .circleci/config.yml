@@ -34,7 +34,6 @@ jobs:
       name: server
     working_directory: ./api/schedule
     steps:
-      - run: cd api/schedule
       - build_and_test_go
   client:
     docker:
