@@ -32,7 +32,7 @@ jobs:
   schedule:
     executor:
       name: server
-    working_directory: ./api/schedule
+    working_directory: ./server/api/schedule
     steps:
       - build_and_test_go
   client:
