@@ -44,8 +44,10 @@ export namespace Schedule {
 }
 
 export class IndexRequest extends jspb.Message {
-  getMonth(): number;
-  setMonth(value: number): IndexRequest;
+  getMonth(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setMonth(value?: google_protobuf_timestamp_pb.Timestamp): IndexRequest;
+  hasMonth(): boolean;
+  clearMonth(): IndexRequest;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): IndexRequest.AsObject;
@@ -57,7 +59,7 @@ export class IndexRequest extends jspb.Message {
 
 export namespace IndexRequest {
   export type AsObject = {
-    month: number,
+    month?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 

@@ -591,7 +591,7 @@ proto.schedule.IndexRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.schedule.IndexRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    month: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    month: (f = msg.getMonth()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -629,7 +629,8 @@ proto.schedule.IndexRequest.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setMonth(value);
       break;
     default:
@@ -662,30 +663,50 @@ proto.schedule.IndexRequest.prototype.serializeBinary = function() {
 proto.schedule.IndexRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getMonth();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f != null) {
+    writer.writeMessage(
       1,
-      f
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional int32 month = 1;
- * @return {number}
+ * optional google.protobuf.Timestamp month = 1;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.schedule.IndexRequest.prototype.getMonth = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 1));
 };
 
 
 /**
- * @param {number} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.schedule.IndexRequest} returns this
+*/
+proto.schedule.IndexRequest.prototype.setMonth = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.schedule.IndexRequest} returns this
  */
-proto.schedule.IndexRequest.prototype.setMonth = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.schedule.IndexRequest.prototype.clearMonth = function() {
+  return this.setMonth(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.schedule.IndexRequest.prototype.hasMonth = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
