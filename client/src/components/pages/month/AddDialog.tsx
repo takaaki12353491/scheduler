@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { scheduleSlice, schedulesSlice, createSchedule } from '../../../redux/slices'
+import { scheduleSlice, createSchedule } from '../../../redux/slices'
 import { 
   Dialog, 
   DialogContent,

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Schedule, CreateRequest }  from '../../pb/schedule_pb'
 import { ScheduleServiceClient } from '../../pb/ScheduleServiceClientPb'
-import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import { URL } from '../../consts'
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const schedules: Schedule.AsObject[] = []
 
@@ -22,7 +22,10 @@ export const createSchedule = createAsyncThunk<
       .setDate(date)
       .setLocation(obj.location)
       .setDescription(obj.description)
-    const client = new ScheduleServiceClient(URL ? URL : '')
+    const { getIdTokenClaims } = useAuth0()
+    const client = new ScheduleServiceClient(process.env.REACT_APP_API_URL, {
+      Authentication: (await getIdTokenClaims()).__raw
+    })
     const response = await client.create(request, {})
     return response.getSchedule()?.toObject()
   }
