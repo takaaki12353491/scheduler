@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { newScheduleSlice } from '../../../redux/slices'
+import { newScheduleSlice, schedulesSlice } from '../../../redux/slices'
 import { GridList, Typography, makeStyles } from '@material-ui/core'
 import Base from '../../templates/base/Base'
 import NewDialog from './NewDialog'
@@ -9,6 +9,7 @@ import Element from './Element'
 import { getDays } from '../../../modules/calendar'
 import { setSchedules } from '../../../modules/schedule'
 import border from '../../../styles/border'
+import ErrorSnackbar from '../../molecules/snackbar/ErrorSnackbar'
 
 const Month: React.FC = () => {
   const classes = useStyles()
@@ -18,7 +19,7 @@ const Month: React.FC = () => {
   const schedules = useSelector(state => state.schedules)
   const dispatch = useDispatch()
   const { actions } = newScheduleSlice
-  const days = setSchedules(getDays(date), schedules)
+  const days = setSchedules(getDays(date), schedules.items)
   return (
     <Base>
       <NewDialog isOpen={newSchedule.isDialogOpen} close={() => dispatch(actions.closeDialog())}/>
@@ -51,6 +52,10 @@ const Month: React.FC = () => {
             </li>
           ))}
         </GridList>
+        <ErrorSnackbar 
+          error={schedules.err}
+          handleClose={() => dispatch(schedulesSlice.actions.clearError())}
+        />
       </div>
     </Base>
   )

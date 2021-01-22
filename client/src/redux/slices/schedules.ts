@@ -6,7 +6,16 @@ import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb'
 import { pbToSchedule } from '../../modules/schedule'
 import { ScheduleForm } from '../../types'
 
-const schedules: Schedule[] = []
+type Schedules = {
+  items: Schedule[]
+  isLoading: boolean
+  err?: string
+}
+
+const init: Schedules = {
+  items: [],
+  isLoading: false,
+}
 
 export const fetchSchedules = createAsyncThunk<
   Schedule[],
@@ -48,15 +57,21 @@ export const createSchedule = createAsyncThunk<
 
 export const schedulesSlice = createSlice({
   name: 'schedules',
-  initialState: schedules,
+  initialState: init,
   reducers: {
-    add: (state, action: PayloadAction<Schedule>) => {
-      state.push(action.payload)
+    add: (state, { payload }: PayloadAction<Schedule>) => {
+      state.items.push(payload)
     },
+    clearError: (state) => {
+      state.err = undefined
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(createSchedule.fulfilled, (state, { payload }) => {
-      payload && state.push(payload)
+      payload && state.items.push(payload)
+    })
+    builder.addCase(createSchedule.rejected, state => {
+      state.err = 'エラーが発生しました。時間をおいて再度お試しください。'
     })
   }
 })

@@ -23,12 +23,12 @@ export const newScheduleSlice = createSlice({
   name: 'newSchedule',
   initialState: init,
   reducers: {
-    set: (state, { payload }: PayloadAction<ScheduleForm>) => ({...state, form: {...state.form, ...payload}}),
+    set: (state, { payload }: PayloadAction<ScheduleForm>) => { state.form = payload },
     openDialog: (_, { payload }: PayloadAction<dayjs.Dayjs>) => ({
       ...init, form: { ...init.form, date: payload }, isDialogOpen: true
     }),
-    closeDialog: (state) => ({...state, isDialogOpen: false, isStartEdit: false}),
-    startEdit: state => ({...state, isStartEdit: true}),
+    closeDialog: state => { state.isDialogOpen = false },
+    startEdit: state => { state.isDialogOpen = false },
   },
 })
 export default newScheduleSlice

@@ -104,7 +104,7 @@ const AddDialog: React.FC<Props> = ({ isOpen, close }) => {
         <Button 
           color='primary' 
           variant='outlined' 
-          disabled={isTitleInvalid}
+          disabled={form.title === ''}
           onClick={() => {
             dispatch(createSchedule(form))
             close()
