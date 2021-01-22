@@ -1,33 +1,48 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { Schedule, CreateRequest }  from '../../pb/schedule_pb'
+import { Schedule } from '../../types'
+import { IndexRequest, CreateRequest }  from '../../pb/schedule_pb'
 import { ScheduleServiceClient } from '../../pb/ScheduleServiceClientPb'
-import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb'
-import { useAuth0 } from '@auth0/auth0-react'
+import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb'
+import { pbToSchedule } from '../../modules/schedule'
+import { ScheduleForm } from '../../types'
 
-const schedules: Schedule.AsObject[] = []
+const schedules: Schedule[] = []
+
+export const fetchSchedules = createAsyncThunk<
+  Schedule[],
+  string,
+  {}
+>('schedules/fetch', async (id, thunkApi) => {
+    const request = new IndexRequest()
+    const client = new ScheduleServiceClient(process.env.REACT_APP_API_URL)
+    const response = await client.index(request, {})
+    return response.getSchedulesList().map(schedule => pbToSchedule(schedule))
+  }
+)
 
 export const createSchedule = createAsyncThunk<
-  Schedule.AsObject | undefined,
-  Schedule.AsObject,
-  {
-    extra: {
-    }
-  }
->('schedule/create', async (obj, thunkApi) => {
+  Schedule | undefined,
+  ScheduleForm,
+  {}
+>('schedule/create', async (form, thunkApi) => {
     const request = new CreateRequest()
-    const date = new google_protobuf_timestamp_pb.Timestamp()
-    obj.date && date.setSeconds(obj.date.seconds)
+    const date = new Timestamp()
+    date.fromDate(form.date.toDate())
     request
-      .setTitle(obj.title)
+      .setTitle(form.title)
       .setDate(date)
-      .setLocation(obj.location)
-      .setDescription(obj.description)
-    const { getIdTokenClaims } = useAuth0()
+      .setLocation(form.location)
+      .setDescription(form.description)
     const client = new ScheduleServiceClient(process.env.REACT_APP_API_URL, {
-      Authentication: (await getIdTokenClaims()).__raw
+      Authentication: ''
     })
-    const response = await client.create(request, {})
-    return response.getSchedule()?.toObject()
+    try {
+      const response = await client.create(request, {})
+      const schedule = response.getSchedule()
+      return schedule && pbToSchedule(schedule)
+    } catch(err) {
+      console.log(err)
+    }
   }
 )
 
@@ -35,7 +50,7 @@ export const schedulesSlice = createSlice({
   name: 'schedules',
   initialState: schedules,
   reducers: {
-    add: (state, action: PayloadAction<Schedule.AsObject>) => {
+    add: (state, action: PayloadAction<Schedule>) => {
       state.push(action.payload)
     },
   },

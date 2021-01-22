@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
 import dateSlice from '../../../redux/slices/date'
 import { 
   IconButton, 
@@ -14,7 +13,6 @@ import Auth from './Auth'
 
 const Header: React.FC = () => {
   const classes = useStyles()
-  const { user, isAuthenticated, isLoading,loginWithRedirect, logout } = useAuth0()
   const date = useSelector(state => state.date)
   const dispatch = useDispatch()
   const { actions } = dateSlice

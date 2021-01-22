@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Schedule }  from '../../pb/schedule_pb'
+import { Schedule }  from '../../types/schedule'
+import dayjs from 'dayjs'
 
-const schedule: Schedule.AsObject = {
+const init: Schedule = {
   id: "",
-  userId: "",
+  userID: "",
   title: "",
-  date: undefined,
+  date: dayjs(),
   description: "",
   location: "",
 }
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
-  initialState: schedule,
+  initialState: init,
   reducers: {
-    set: (_, action: PayloadAction<Schedule.AsObject>) => action.payload,
+    set: (_, { payload }: PayloadAction<Schedule>) => payload,
   },
 })
 export default scheduleSlice

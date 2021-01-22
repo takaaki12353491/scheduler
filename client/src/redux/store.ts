@@ -1,9 +1,15 @@
 import 'react-redux'
 import { combineReducers } from '@reduxjs/toolkit'
-import { dateSlice, scheduleSlice, schedulesSlice } from './slices'
+import { 
+  dateSlice,
+  newScheduleSlice,
+  scheduleSlice, 
+  schedulesSlice 
+} from './slices'
 
 const rootReducer = combineReducers({ 
   date: dateSlice.reducer,
+  newSchedule: newScheduleSlice.reducer,
   schedule: scheduleSlice.reducer,
   schedules: schedulesSlice.reducer,
 })

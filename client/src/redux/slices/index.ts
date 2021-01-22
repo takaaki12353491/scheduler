@@ -1,4 +1,5 @@
 export * from './auth'
 export * from './date'
+export * from './newSchedule'
 export * from './schedule'
 export * from './schedules'

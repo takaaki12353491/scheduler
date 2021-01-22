@@ -10,7 +10,6 @@ import {
   makeStyles
 } from '@material-ui/core'
 import { Close, LocationOnOutlined, NotesOutlined } from '@material-ui/icons'
-import { timestampToDate } from '../../../modules/calendar'
 
 type Props = {
   isOpen: boolean
@@ -48,7 +47,7 @@ const DetailDialog: React.FC<Props> = ({ isOpen, close }) => {
                     {schedule.title}
                   </Typography>
                   <Typography color='textSecondary'>
-                    {schedule.date && timestampToDate(schedule.date).format('M月 D日')}
+                    {schedule.date.format('M月 D日')}
                   </Typography>
                 </Grid>
               </Grid>

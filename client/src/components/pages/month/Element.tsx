@@ -1,6 +1,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
-import { Schedule } from '../../../pb/schedule_pb'
+import { Schedule } from '../../../types'
 import { useSelector } from 'react-redux'
 import { Typography, makeStyles } from '@material-ui/core'
 import { isSameMonth, isFirstDay, isSameDay } from '../../../modules/calendar'
@@ -8,7 +8,7 @@ import border from '../../../styles/border'
 
 type Props = {
   day: dayjs.Dayjs
-  schedules: Schedule.AsObject[]
+  schedules: Schedule[]
   openDialog: () => void
 }
 
