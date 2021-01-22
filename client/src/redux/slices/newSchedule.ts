@@ -28,7 +28,7 @@ export const newScheduleSlice = createSlice({
       ...init, form: { ...init.form, date: payload }, isDialogOpen: true
     }),
     closeDialog: state => { state.isDialogOpen = false },
-    startEdit: state => { state.isDialogOpen = false },
+    startEdit: state => { state.isStartEdit = true },
   },
 })
 export default newScheduleSlice
