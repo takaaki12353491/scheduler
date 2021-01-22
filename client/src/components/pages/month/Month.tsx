@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { newScheduleSlice, scheduleSlice, schedulesSlice } from '../../../redux/slices'
+import { newScheduleSlice, schedulesSlice } from '../../../redux/slices'
 import { GridList, Typography, makeStyles } from '@material-ui/core'
 import Base from '../../templates/base/Base'
 import NewDialog from './NewDialog'
