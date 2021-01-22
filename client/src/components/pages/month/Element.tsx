@@ -1,7 +1,8 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import { Schedule } from '../../../types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { scheduleSlice } from '../../../redux/slices'
 import { Typography, makeStyles } from '@material-ui/core'
 import { isSameMonth, isFirstDay, isSameDay } from '../../../modules/calendar'
 import border from '../../../styles/border'
@@ -9,12 +10,12 @@ import border from '../../../styles/border'
 type Props = {
   day: dayjs.Dayjs
   schedules: Schedule[]
-  openDialog: () => void
 }
 
-const Element: React.FC<Props> = ({ day, schedules, openDialog }) => {
+const Element: React.FC<Props> = ({ day, schedules }) => {
   const classes = useStyles()
   const date = useSelector(state => state.date)
+  const dispatch = useDispatch()
   const today = dayjs()
   const format = isFirstDay(day) ? 'M月D日' : 'D'
   const isToday = isSameDay(day, today)
@@ -38,7 +39,7 @@ const Element: React.FC<Props> = ({ day, schedules, openDialog }) => {
               className={classes.schedule}
               onClick={(e: React.MouseEvent) => {
                 e.stopPropagation()
-                openDialog()
+                dispatch(scheduleSlice.actions.openDialog(schedule))
               }}
             >
               {schedule.title}

@@ -1,16 +1,23 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { scheduleSlice } from '../../../redux/slices'
+import { scheduleSlice, newScheduleSlice, deleteSchedule } from '../../../redux/slices'
 import {
   Dialog,
   DialogContent,
-  IconButton,
   DialogActions,
+  Tooltip,
+  IconButton,
   Grid,
   Typography,
   makeStyles
 } from '@material-ui/core'
-import { Close, LocationOnOutlined, NotesOutlined } from '@material-ui/icons'
+import {
+  EditOutlined,
+  DeleteOutlineOutlined,
+  Close, 
+  LocationOnOutlined, 
+  NotesOutlined 
+} from '@material-ui/icons'
 
 const DetailDialog: React.FC = () => {
   const classes = useStyles()
@@ -22,13 +29,32 @@ const DetailDialog: React.FC = () => {
       maxWidth='xs' 
       fullWidth 
       open={isDialogOpen} 
-      onClose={() => dispatch(actions.openDialog())}
+      onClose={() => dispatch(actions.closeDialog())}
     >
       <DialogActions>
-        <div className={classes.closeButton}>
-          <IconButton size='small' onClick={() => dispatch(actions.closeDialog())}>
-            <Close />
-          </IconButton>
+        <div className={classes.buttons}>
+          <Tooltip title="編集" placement="bottom">
+            <IconButton size="small" className={classes.button} onClick={() => {
+              dispatch(actions.closeDialog())
+              dispatch(newScheduleSlice.actions.edit(item))
+            }}>
+              <EditOutlined />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="削除" placement="bottom">
+            <IconButton size="small" className={classes.button} onClick={() => 
+              dispatch(deleteSchedule(item.id))
+            }>
+              <DeleteOutlineOutlined />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="閉じる" placement="bottom">
+            <IconButton size="small" className={classes.button} onClick={() => 
+              dispatch(actions.closeDialog())
+            }>
+              <Close />
+            </IconButton>
+          </Tooltip>
         </div>
       </DialogActions>
       <DialogContent>
@@ -97,8 +123,11 @@ const DetailDialog: React.FC = () => {
 export default DetailDialog
 
 const useStyles = makeStyles(theme => ({
-  closeButton: {
+  buttons: {
     textAlign: 'right',
+  },
+  button: {
+    margin: '0 10px',
   },
   box: {
     backgroundColor: 'rgb(121, 134, 203)',

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createSchedule, newScheduleSlice } from '../../../redux/slices'
+import { newScheduleSlice, createSchedule, updateSchedule } from '../../../redux/slices'
 import { 
   Dialog, 
   DialogContent,
@@ -21,7 +21,8 @@ import { DatePicker } from '@material-ui/pickers'
 
 const AddDialog: React.FC = () => {
   const classes = useStyles()
-  const { form, isDialogOpen, isStartEdit } = useSelector(state => state.newSchedule)
+  const { type, form, isDialogOpen, isStartEdit } = useSelector(state => state.newSchedule)
+  const { item } = useSelector(state => state.schedule)
   const dispatch = useDispatch()
   const { actions } = newScheduleSlice
   const isTitleInvalid = isStartEdit && form.title === ''
@@ -105,7 +106,16 @@ const AddDialog: React.FC = () => {
           variant='outlined' 
           disabled={form.title === ''}
           onClick={() => {
-            dispatch(createSchedule(form))
+            switch (type) {
+              case 'create':
+                dispatch(createSchedule(form))
+                break
+              case 'update':
+                dispatch(updateSchedule({id: item.id, form: form}))
+                break
+              default:
+                break;
+            }
             dispatch(actions.closeDialog())
           }}
         >

@@ -24,7 +24,10 @@ export const scheduleSlice = createSlice({
   initialState: init,
   reducers: {
     set: (state, { payload }: PayloadAction<Schedule>) => { state.item = payload },
-    openDialog: state => { state.isDialogOpen = true },
+    openDialog: (state, { payload }: PayloadAction<Schedule>) => {
+      state.item = payload
+      state.isDialogOpen = true 
+    },
     closeDialog: state => { state.isDialogOpen = false },
   },
 })

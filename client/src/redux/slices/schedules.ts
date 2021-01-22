@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Schedule } from '../../types'
-import { IndexRequest, CreateRequest }  from '../../pb/schedule_pb'
+import { IndexRequest, CreateRequest, UpdateRequest, DeleteRequest }  from '../../pb/schedule_pb'
 import { ScheduleServiceClient } from '../../pb/ScheduleServiceClientPb'
 import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb'
 import { pbToSchedule } from '../../modules/schedule'
 import { ScheduleForm } from '../../types'
+import dayjs from 'dayjs'
 
 type Schedules = {
   items: Schedule[]
@@ -13,7 +14,7 @@ type Schedules = {
 }
 
 const init: Schedules = {
-  items: [],
+  items: [{id: 'test', userID: 'test', title: 'test', date: dayjs(), location: 'test', description: 'test'}],
   isLoading: false,
 }
 
@@ -46,9 +47,56 @@ export const createSchedule = createAsyncThunk<
       Authentication: ''
     })
     try {
-      const response = await client.create(request, {})
+      const response = await client.create(request, {
+        Authorization: ''
+      })
       const schedule = response.getSchedule()
       return schedule && pbToSchedule(schedule)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+)
+
+export const updateSchedule = createAsyncThunk<
+  Schedule | undefined,
+  { id: string, form: ScheduleForm},
+  {}
+>('schedule/update', async ({ id,form }, thunkApi) => {
+    const request = new UpdateRequest()
+    const date = new Timestamp()
+    date.fromDate(form.date.toDate())
+    request
+      .setTitle(form.title)
+      .setDate(date)
+      .setLocation(form.location)
+      .setDescription(form.description)
+    const client = new ScheduleServiceClient(process.env.REACT_APP_API_URL)
+    try {
+      const response = await client.create(request, {
+        Authorization: ''
+      })
+      const schedule = response.getSchedule()
+      return schedule && pbToSchedule(schedule)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+)
+
+export const deleteSchedule = createAsyncThunk<
+  string | undefined,
+  string,
+  {}
+>('schedule/delete', async (id, thunkApi) => {
+    const request = new DeleteRequest()
+    request.setId(id)
+    const client = new ScheduleServiceClient(process.env.REACT_APP_API_URL)
+    try {
+      const response = await client.delete(request, {
+        Authorization: ''
+      })
+      return id
     } catch(err) {
       console.log(err)
     }

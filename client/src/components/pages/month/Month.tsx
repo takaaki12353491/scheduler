@@ -42,11 +42,7 @@ const Month: React.FC = () => {
               key={day.toISOString()}
               onClick={() => dispatch(actions.openDialog(day))}
             >
-              <Element 
-                day={day} 
-                schedules={schedules}
-                openDialog={() => dispatch(scheduleSlice.actions.openDialog())}
-              />
+              <Element day={day} schedules={schedules} />
             </li>
           ))}
         </GridList>
