@@ -2,20 +2,30 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Schedule }  from '../../types/schedule'
 import dayjs from 'dayjs'
 
-const init: Schedule = {
-  id: "",
-  userID: "",
-  title: "",
-  date: dayjs(),
-  description: "",
-  location: "",
+type CurrentSchedule = {
+  item: Schedule
+  isDialogOpen: boolean
+}
+
+const init: CurrentSchedule = {
+  item: {
+    id: "",
+    userID: "",
+    title: "",
+    date: dayjs(),
+    description: "",
+    location: "",
+  },
+  isDialogOpen: false
 }
 
 export const scheduleSlice = createSlice({
   name: 'schedule',
   initialState: init,
   reducers: {
-    set: (_, { payload }: PayloadAction<Schedule>) => payload,
+    set: (state, { payload }: PayloadAction<Schedule>) => { state.item = payload },
+    openDialog: state => { state.isDialogOpen = true },
+    closeDialog: state => { state.isDialogOpen = false },
   },
 })
 export default scheduleSlice

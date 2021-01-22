@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { scheduleSlice, createSchedule, newScheduleSlice } from '../../../redux/slices'
+import { createSchedule, newScheduleSlice } from '../../../redux/slices'
 import { 
   Dialog, 
   DialogContent,
@@ -19,25 +19,24 @@ import {
 } from '@material-ui/icons'
 import { DatePicker } from '@material-ui/pickers'
 
-type Props = {
-  isOpen: boolean
-  close: () => void
-}
-
-const AddDialog: React.FC<Props> = ({ isOpen, close }) => {
+const AddDialog: React.FC = () => {
   const classes = useStyles()
-  const { form, isStartEdit } = useSelector(state => state.newSchedule)
+  const { form, isDialogOpen, isStartEdit } = useSelector(state => state.newSchedule)
   const dispatch = useDispatch()
   const { actions } = newScheduleSlice
   const isTitleInvalid = isStartEdit && form.title === ''
   return (
-    <Dialog open={isOpen} onClose={close} maxWidth='xs' fullWidth>
+    <Dialog 
+      maxWidth='xs' 
+      fullWidth
+      open={isDialogOpen} 
+      onClose={() => dispatch(actions.closeDialog())}>
       <DialogContent>
         <DialogActions>
           <div className={classes.closeButton}>
             <IconButton 
               size='small'
-              onClick={close} 
+              onClick={() => dispatch(actions.closeDialog())} 
             >
               <Close />
             </IconButton>
@@ -107,7 +106,7 @@ const AddDialog: React.FC<Props> = ({ isOpen, close }) => {
           disabled={form.title === ''}
           onClick={() => {
             dispatch(createSchedule(form))
-            close()
+            dispatch(actions.closeDialog())
           }}
         >
           保存

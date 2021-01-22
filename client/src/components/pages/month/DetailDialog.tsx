@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { scheduleSlice } from '../../../redux/slices'
 import {
   Dialog,
   DialogContent,
@@ -11,25 +12,27 @@ import {
 } from '@material-ui/core'
 import { Close, LocationOnOutlined, NotesOutlined } from '@material-ui/icons'
 
-type Props = {
-  isOpen: boolean
-  close: () => void
-}
-
-const DetailDialog: React.FC<Props> = ({ isOpen, close }) => {
+const DetailDialog: React.FC = () => {
   const classes = useStyles()
-  const schedule = useSelector(state => state.schedule)
+  const { item, isDialogOpen } = useSelector(state => state.schedule)
+  const dispatch = useDispatch()
+  const { actions } = scheduleSlice
   return (
-    <Dialog open={isOpen} onClose={close} maxWidth='xs' fullWidth>
+    <Dialog 
+      maxWidth='xs' 
+      fullWidth 
+      open={isDialogOpen} 
+      onClose={() => dispatch(actions.openDialog())}
+    >
       <DialogActions>
         <div className={classes.closeButton}>
-          <IconButton onClick={close} size='small'>
+          <IconButton size='small' onClick={() => dispatch(actions.closeDialog())}>
             <Close />
           </IconButton>
         </div>
       </DialogActions>
       <DialogContent>
-        {schedule && (
+        {item && (
           <>
             <div>
               <Grid
@@ -44,16 +47,16 @@ const DetailDialog: React.FC<Props> = ({ isOpen, close }) => {
                 </Grid>
                 <Grid item xs={10}>
                   <Typography variant='h5' component='h2'>
-                    {schedule.title}
+                    {item.title}
                   </Typography>
                   <Typography color='textSecondary'>
-                    {schedule.date.format('M月 D日')}
+                    {item.date.format('M月 D日')}
                   </Typography>
                 </Grid>
               </Grid>
             </div>
 
-            {schedule.location && (
+            {item.location && (
               <Grid
                 container
                 spacing={1}
@@ -65,11 +68,11 @@ const DetailDialog: React.FC<Props> = ({ isOpen, close }) => {
                   <LocationOnOutlined />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography>{schedule.location}</Typography>
+                  <Typography>{item.location}</Typography>
                 </Grid>
               </Grid>
             )}
-            {schedule.description && (
+            {item.description && (
               <Grid
                 container
                 spacing={1}
@@ -81,7 +84,7 @@ const DetailDialog: React.FC<Props> = ({ isOpen, close }) => {
                   <NotesOutlined />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography>{schedule.description}</Typography>
+                  <Typography>{item.description}</Typography>
                 </Grid>
               </Grid>
             )}
