@@ -25,7 +25,10 @@ export const newScheduleSlice = createSlice({
   name: 'newSchedule',
   initialState: init,
   reducers: {
-    set: (state, { payload }: PayloadAction<ScheduleForm>) => { state.form = payload },
+    set: (state, { payload }: PayloadAction<ScheduleForm>) => { 
+      state.form = payload
+      state.isStartEdit = true
+    },
     edit: (state, { payload }: PayloadAction<Schedule>) => {
       state.type = 'update'
       state.form = { ...payload }
@@ -34,8 +37,10 @@ export const newScheduleSlice = createSlice({
     openDialog: (_, { payload }: PayloadAction<dayjs.Dayjs>) => ({
       ...init, form: { ...init.form, date: payload }, isDialogOpen: true
     }),
-    closeDialog: state => { state.isDialogOpen = false },
-    startEdit: state => { state.isStartEdit = true },
+    closeDialog: state => { 
+      if (state.isStartEdit && !window.confirm('保存されてない変更を破棄しますか？')) return
+      state.isDialogOpen = false
+    },
   },
 })
 export default newScheduleSlice

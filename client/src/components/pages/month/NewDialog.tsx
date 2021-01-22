@@ -49,7 +49,7 @@ const AddDialog: React.FC = () => {
           placeholder='タイトルと日時を追加'
           value={form.title}
           onChange={e => dispatch(actions.set({...form, title: e.target.value}))}
-          onBlur={e => dispatch(actions.startEdit())}
+          //onBlur={e => dispatch(actions.startEdit())}
           error={isTitleInvalid}
           helperText={isTitleInvalid && 'タイトルは必須です。'}
           className={classes.title}
