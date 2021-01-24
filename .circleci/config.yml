@@ -32,7 +32,7 @@ jobs:
   api:
     executor:
       name: go
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/api
     steps:
       - build_and_test_go
   client:
