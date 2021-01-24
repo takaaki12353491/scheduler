@@ -21,8 +21,9 @@ func NewServer(repo *Repository) *Server {
 }
 
 func (s *Server) Index(ctx context.Context, req *pb.IndexRequest) (*pb.IndexResponse, error) {
+	name := req.GetName()
 	month := req.Month.AsTime()
-	schedules, err := s.repo.FindList(&month)
+	schedules, err := s.repo.FindList(name, &month)
 	if err != nil {
 		log.Error(err)
 		return nil, err

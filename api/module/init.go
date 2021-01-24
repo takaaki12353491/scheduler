@@ -3,10 +3,12 @@ package module
 import (
 	"time"
 
+	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 )
 
 func Initialize() {
+	godotenv.Load()
 	const LOCATION = "Asia/Tokyo"
 	loc, err := time.LoadLocation(LOCATION)
 	if err != nil {

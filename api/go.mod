@@ -4,9 +4,11 @@ go 1.14
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
 	github.com/golang/protobuf v1.4.3
 	github.com/google/martian v2.1.0+incompatible
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
+	github.com/joho/godotenv v1.3.0
 	github.com/sirupsen/logrus v1.7.0
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
 	golang.org/x/sys v0.0.0-20210119212857-b64e53b001e4 // indirect

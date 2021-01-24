@@ -23,7 +23,8 @@ message Schedule {
 }
 
 message IndexRequest {
-  google.protobuf.Timestamp month = 1;
+  string name = 1;
+  google.protobuf.Timestamp month = 2;
 }
 message IndexResponse {
   repeated Schedule schedules = 1;

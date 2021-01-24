@@ -14,7 +14,7 @@ import (
 
 func main() {
 	module.Initialize()
-	lis, err := net.Listen("tcp", ":8080")
+	lis, err := net.Listen("tcp", ":9090")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
@@ -23,8 +23,8 @@ func main() {
 			grpc_auth.UnaryServerInterceptor(module.AuthFunc),
 		),
 	)
-	db := NewDB()
-	server := NewServer(db)
+	repo := NewRepository()
+	server := NewServer(repo)
 	pb.RegisterScheduleServiceServer(s, server)
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {

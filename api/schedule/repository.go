@@ -12,13 +12,14 @@ type Repository struct {
 	db *gorm.DB
 }
 
-func NewDB() *Repository {
+func NewRepository() *Repository {
 	return &Repository{module.NewConnection(
 		module.WithDBName("schedule"),
 	)}
 }
 
-func (repo *Repository) FindList(month *time.Time) ([]Schedule, error) {
+func (repo *Repository) FindList(userID string, month *time.Time) ([]Schedule, error) {
+	//TODO
 	start := time.Date(month.Year(), month.Month(), 1, 0, 0, 0, 0, time.UTC)
 	end := start.AddDate(0, 1, -1)
 	schedules := []Schedule{}
