@@ -8,36 +8,29 @@ executors:
     environment:
       GO111MODULE: "on"
 
-commands:
-  build_and_test_go:
+jobs:
+  api:
+    executor:
+      name: go
     steps:
       - checkout
       - restore_cache:
           name: Restore go modules cache
           keys:
-            - v1-mod-{{ .Branch }}-{{ checksum "${WORKDIR}/go.mod" }}
+            - v1-mod-{{ .Branch }}-{{ checksum ".api/go.mod" }}
       - run:
           name: Vendoring
+          working_directory: ./api
           command: go mod download
-          working_directory: ${WORKDIR}
       - save_cache:
           name: Save go modules cache
-          key: v1-mod-{{ .Branch }}-{{ checksum "${WORKDIR}/go.mod" }}
+          key: v1-mod-{{ .Branch }}-{{ checksum ".api/go.mod" }}
           paths:
             - ~/go/pkg/mod/cache
       - run:
           name: Test go package
+          working_directory: ./api
           command: go test -v ./...
-          working_directory: ${WORKDIR}
-
-jobs:
-  api:
-    executor:
-      name: go
-    environment:
-      WORKDIR: "./api"
-    steps:
-      - build_and_test_go
   client:
     docker:
       - image: circleci/node:12.18.4
