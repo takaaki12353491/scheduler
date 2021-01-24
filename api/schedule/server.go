@@ -1,9 +1,9 @@
 package main
 
 import (
+	"api/module"
+	"api/pb"
 	"context"
-	"scheduler/server/module"
-	"scheduler/server/pb"
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/xerrors"

@@ -1,9 +1,9 @@
 package main
 
 import (
+	"api/module"
+	"api/pb"
 	"net"
-	"scheduler/server/module"
-	"scheduler/server/pb"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
