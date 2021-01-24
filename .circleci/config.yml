@@ -1,10 +1,10 @@
 version: 2.1
 
 executors:
-  server:
+  go:
     docker:
       - image: circleci/golang:1.14
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/api
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     environment:
       GO111MODULE: "on"
 
@@ -29,9 +29,10 @@ commands:
           command: go test -v ./...
 
 jobs:
-  schedule:
+  api:
     executor:
-      name: server
+      name: go
+    working_directory: ./api
     steps:
       - build_and_test_go
   client:
@@ -48,4 +49,4 @@ workflows:
   version: 2
   server:
     jobs:
-      - schedule
+      - api
