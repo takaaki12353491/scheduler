@@ -17,14 +17,14 @@ jobs:
       - restore_cache:
           name: Restore go modules cache
           keys:
-            - v1-mod-{{ .Branch }}-{{ checksum ".api/go.mod" }}
+            - v1-mod-{{ .Branch }}-{{ checksum "./api/go.mod" }}
       - run:
           name: Vendoring
           working_directory: ./api
           command: go mod download
       - save_cache:
           name: Save go modules cache
-          key: v1-mod-{{ .Branch }}-{{ checksum ".api/go.mod" }}
+          key: v1-mod-{{ .Branch }}-{{ checksum "./api/go.mod" }}
           paths:
             - ~/go/pkg/mod/cache
       - run:
