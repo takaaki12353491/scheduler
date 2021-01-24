@@ -3,14 +3,14 @@ version: "3"
 services:
   db:
     image: mysql:latest
-    container_name: scheduler_db
+    build:
+      context: ./db
     environment:
       MYSQL_ROOT_PASSWORD: ${SCHEDULER_MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${SCHEDULER_MYSQL_DATABASE}
       MYSQL_USER: ${SCHEDULER_MYSQL_USER}
       MYSQL_PASSWORD: ${SCHEDULER_MYSQL_PASSWORD}
       TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./db/data:/var/lib/mysql
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
@@ -18,3 +18,9 @@ services:
       - ./db/scripts:/scripts
     ports:
       - 3306:3306
+  proxy:
+    image: envoyproxy/envoy:v1.17-latest
+    build:
+      context: ./proxy
+    ports:
+      - "8080:8080"
