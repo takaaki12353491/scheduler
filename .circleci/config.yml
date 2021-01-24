@@ -4,7 +4,7 @@ executors:
   server:
     docker:
       - image: circleci/golang:1.14
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/api
     environment:
       GO111MODULE: "on"
 
@@ -15,20 +15,18 @@ commands:
       - restore_cache:
           name: Restore go modules cache
           keys:
-            - v1-mod-{{ .Branch }}-{{ checksum "./api/go.mod" }}
+            - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
       - run:
           name: Vendoring
           command: go mod download
-          working_directory: ./api
       - save_cache:
           name: Save go modules cache
-          key: v1-mod-{{ .Branch }}-{{ checksum "./api/go.mod" }}
+          key: v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
           paths:
             - ~/go/pkg/mod/cache
       - run:
           name: Test go package
           command: go test -v ./...
-          working_directory: ./api
 
 jobs:
   schedule:
