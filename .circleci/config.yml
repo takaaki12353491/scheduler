@@ -15,24 +15,27 @@ commands:
       - restore_cache:
           name: Restore go modules cache
           keys:
-            - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
+            - v1-mod-{{ .Branch }}-{{ checksum "${WORKDIR}/go.mod" }}
       - run:
           name: Vendoring
           command: go mod download
+          working_directory: ${WORKDIR}
       - save_cache:
           name: Save go modules cache
-          key: v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
+          key: v1-mod-{{ .Branch }}-{{ checksum "${WORKDIR}/go.mod" }}
           paths:
             - ~/go/pkg/mod/cache
       - run:
           name: Test go package
           command: go test -v ./...
+          working_directory: ${WORKDIR}
 
 jobs:
   api:
     executor:
       name: go
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}/api
+    environment:
+      WORKDIR: "./api"
     steps:
       - build_and_test_go
   client:
