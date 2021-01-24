@@ -1,8 +1,8 @@
 package main
 
 import (
-	"scheduler/server/module"
-	"scheduler/server/pb"
+	"api/module"
+	"api/pb"
 	"time"
 
 	"google.golang.org/protobuf/types/known/timestamppb"

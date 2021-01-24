@@ -1,7 +1,7 @@
 package main
 
 import (
-	"scheduler/server/module"
+	"api/module"
 	"time"
 
 	log "github.com/sirupsen/logrus"
