@@ -23,7 +23,7 @@ func (repo *Repository) FindList(userID string, month *time.Time) ([]Schedule, e
 	start := time.Date(month.Year(), month.Month(), 1, 0, 0, 0, 0, time.UTC)
 	end := start.AddDate(0, 1, -1)
 	schedules := []Schedule{}
-	err := repo.db.Where("date BETWEEN ? AND ?", start.String(), end.String()).Find(&schedules).Error
+	err := repo.db.Where("userID = ? AND date BETWEEN ? AND ?", userID, start.String(), end.String()).Find(&schedules).Error
 	if err != nil {
 		log.Error(err)
 		return nil, err

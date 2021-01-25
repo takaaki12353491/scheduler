@@ -21,9 +21,9 @@ func NewServer(repo *Repository) *Server {
 }
 
 func (s *Server) Index(ctx context.Context, req *pb.IndexRequest) (*pb.IndexResponse, error) {
-	name := req.GetName()
+	userID := module.GetUserID(ctx)
 	month := req.Month.AsTime()
-	schedules, err := s.repo.FindList(name, &month)
+	schedules, err := s.repo.FindList(userID, &month)
 	if err != nil {
 		log.Error(err)
 		return nil, err
