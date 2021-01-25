@@ -31,7 +31,11 @@ const AddDialog: React.FC = () => {
       maxWidth='xs' 
       fullWidth
       open={isDialogOpen} 
-      onClose={() => dispatch(actions.closeDialog())}>
+      onClose={() => {
+        if (isStartEdit && !window.confirm('保存されてない変更を破棄しますか？')) return
+        dispatch(actions.closeDialog())
+      }}
+    >
       <DialogContent>
         <DialogActions>
           <div className={classes.closeButton}>

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Schedule, ScheduleForm } from '../../types/schedule'
 import dayjs from 'dayjs'
-import equal from 'deep-equal'
 import { isSameDay } from '../../modules/calendar'
 
 type NewSchedule = {
@@ -59,9 +58,9 @@ export const newScheduleSlice = createSlice({
       ...init, form: { ...init.form, date: payload }, isDialogOpen: true
     }),
     closeDialog: state => { 
-      if (state.isStartEdit && !window.confirm('保存されてない変更を破棄しますか？')) return
       state.isDialogOpen = false
     },
+
   },
 })
 export default newScheduleSlice
