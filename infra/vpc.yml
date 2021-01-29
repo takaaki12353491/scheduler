@@ -1,0 +1,328 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: VPC resources
+Resources: 
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: VPC
+  
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: internet-gateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  Public1Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1a
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.0.0/24
+      Tags:
+        - Key: Name
+          Value: Public1Subnet
+
+  Public2Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1c
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: Public2Subnet
+
+  Client1Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1a
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.0/24
+      Tags:
+        - Key: Name
+          Value: Client1Subnet
+
+  Client2Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1c
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.3.0/24
+      Tags:
+        - Key: Name
+          Value: Client2Subnet
+
+  API1Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1a
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.4.0/24
+      Tags:
+        - Key: Name
+          Value: API1Subnet
+
+  API2Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1c
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.5.0/24
+      Tags:
+        - Key: Name
+          Value: API2Subnet
+
+  DB1Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1a
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.6.0/24
+      Tags:
+        - Key: Name
+          Value: DB1Subnet
+
+  DB2Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: ap-northeast-1c
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.7.0/24
+      Tags:
+        - Key: Name
+          Value: DB2Subnet
+
+  PublicSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: PublicSG
+      GroupDescription: PublicSG
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: PublicSG
+
+  ALBSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ALBSG
+      GroupDescription: ALBSG
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: ALBSG
+
+  ClientSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ClientSG
+      GroupDescription: ClientSG
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref ALBSG
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !Ref PublicSG
+      Tags:
+        - Key: Name
+          Value: ClientSG
+
+  NLBSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: NLBSG
+      GroupDescription: NLBSG
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref ClientSG
+      Tags:
+        - Key: Name
+          Value: NLBSG
+
+  APISG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: APISG
+      GroupDescription: APISG
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref NLBSG
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          SourceSecurityGroupId: !Ref PublicSG
+      Tags:
+        - Key: Name
+          Value: ClientSG
+
+  PublicRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: PublicRT
+
+  ClientRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: ClientRT
+
+  APIRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: APIRT
+
+  DBRT:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: DBRT
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRT
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  Public1RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Public1Subnet
+      RouteTableId: !Ref PublicRT
+
+  Public2RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Public2Subnet
+      RouteTableId: !Ref PublicRT
+    
+  Client1RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Client1Subnet
+      RouteTableId: !Ref ClientRT
+
+  Client2RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Client2Subnet
+      RouteTableId: !Ref ClientRT
+
+  API1RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref API1Subnet
+      RouteTableId: !Ref APIRT
+
+  API2RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref API2Subnet
+      RouteTableId: !Ref APIRT
+
+  DB1RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref DB1Subnet
+      RouteTableId: !Ref DBRT
+
+  DB2RTA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref DB2Subnet
+      RouteTableId: !Ref DBRT
+
+Outputs:
+  VPC:
+    Value: !Ref VPC
+    Export: 
+      Name: VPC
+  Public1Subnet:
+    Value: !Ref Public1Subnet
+    Export: 
+      Name: Public1Subnet
+  Public2Subnet:
+    Value: !Ref Public2Subnet
+    Export: 
+      Name: Public2Subnet
+  Client1Subnet:
+    Value: !Ref Client1Subnet
+    Export: 
+      Name: Client1Subnet
+  Client2Subnet:
+    Value: !Ref Client2Subnet
+    Export: 
+      Name: Client2Subnet
+  API1Subnet:
+    Value: !Ref API1Subnet
+    Export: 
+      Name: API1Subnet
+  API2Subnet:
+    Value: !Ref API2Subnet
+    Export: 
+      Name: API2Subnet
+  PublicSG:
+    Value: !Ref PublicSG
+    Export: 
+      Name: PublicSG
+  ALBSG:
+    Value: !Ref ALBSG
+    Export: 
+      Name: ALBSG
+  ClientSG:
+    Value: !Ref ClientSG
+    Export: 
+      Name: ClientSG
+  NLBSG:
+    Value: !Ref NLBSG
+    Export: 
+      Name: NLBSG
+  APISG:
+    Value: !Ref APISG
+    Export: 
+      Name: APISG

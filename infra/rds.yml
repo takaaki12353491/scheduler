@@ -1,0 +1,49 @@
+# incomplete
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---
+Metadata: 
+
+Parameters: 
+
+Mappings: 
+
+Conditions: 
+
+Resources: 
+  rdsDBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 20
+      DBInstanceClass: db.t2.micro
+      AvailabilityZone: ap-northeast-1a
+      CharacterSetName: 
+      DBInstanceIdentifier: SchedulerDB
+      DBName: 
+      DBParameterGroupName: 
+      DBSecurityGroups: 
+        - db-sg-group
+      DBSnapshotIdentifier: 
+      DBSubnetGroupName: 
+      Engine: mysql
+      EngineVersion: 8.0
+      Iops: 
+      KmsKeyId: 
+      LicenseModel: 
+      MasterUsername: 
+      MasterUserPassword: 
+      MultiAZ: true
+      OptionGroupName: 
+      Port: 3306
+      PreferredBackupWindow: 
+      PreferredMaintenanceWindow: 
+      PubliclyAccessible: true|false
+      SourceDBInstanceIdentifier: 
+      StorageEncrypted: true|false
+      StorageType: 
+      VPCSecurityGroups:
+        - vpc-sg-id
+      Tags:
+        - Key: keyname
+          Value: value
+
+Outputs:

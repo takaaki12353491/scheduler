@@ -1,0 +1,169 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters: 
+  DefaultAMI:
+    Type: String
+    Default: ami-0992fc94ca0f1415a
+  MyAMI:
+    Type: String
+    Default: ami-0ce877476cd80a439
+  KeyName:
+    Description: The EC2 Key Pair to allow SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+Resources: 
+  Client1EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: KeyName
+      ImageId: !Ref MyAMI
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue ClientSG
+      SubnetId: !ImportValue Client1Subnet
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name
+          Value: Client1EC2
+
+  Client2EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: KeyName
+      ImageId: !Ref MyAMI
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue ClientSG
+      SubnetId: !ImportValue Client2Subnet
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name
+          Value: Client1EC2
+
+  API1EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: KeyName
+      ImageId: !Ref MyAMI
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue APISG
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name
+          Value: API1EC2
+
+  API2EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: KeyName
+      ImageId: !Ref MyAMI
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue APISG
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name
+          Value: API2EC2
+
+  ALB:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Tags:
+        - Key: Name
+          Value: ALB
+      IpAddressType: ipv4
+      Scheme: internet-facing
+      SecurityGroups:
+        - !ImportValue ALBSG
+      Subnets:
+        - !ImportValue Public1Subnet
+        - !ImportValue Public2Subnet
+
+  ALBTG:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties: 
+      HealthCheckPath: /healthcheck.html
+      HealthCheckIntervalSeconds: 10
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 5
+      Name: ALBTG
+      Port: 80
+      Protocol: HTTP
+      Tags: 
+        - Key: Name
+          Value: ALBTG
+      Targets: 
+        - AvailabilityZone: ap-northeast-1a
+          Id: !Ref Client1EC2
+          Port: 80
+        - AvailabilityZone: ap-northeast-1c
+          Id: !Ref Client2EC2
+          Port: 80
+      TargetType: instance
+      VpcId: !ImportValue VPC
+
+  ALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref ALBTG
+      Port: 80
+      Protocol: HTTP
+      LoadBalancerArn: !Ref ALB
+
+  NLB:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Tags:
+        - Key: Name
+          Value: ALB
+      IpAddressType: ipv4
+      Scheme: internal
+      SecurityGroups:
+        - !ImportValue NLBSG
+      Subnets:
+        - !ImportValue Client1Subnet
+        - !ImportValue Client2Subnet
+
+  NLBTG:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties: 
+      HealthCheckPath: /healthcheck.html
+      HealthCheckIntervalSeconds: 10
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 5
+      Name: NLBTG
+      Port: 80
+      Protocol: HTTP
+      Tags: 
+        - Key: Name
+          Value: NLBTG
+      Targets: 
+        - AvailabilityZone: ap-northeast-1a
+          Id: !Ref API1EC2
+          Port: 80
+        - AvailabilityZone: ap-northeast-1c
+          Id: !Ref API2EC2
+          Port: 80
+      TargetType: instance
+      VpcId: !ImportValue VPC
+
+  NLBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref NLBTG
+      Port: 80
+      Protocol: HTTP
+      LoadBalancerArn: !Ref NLB
