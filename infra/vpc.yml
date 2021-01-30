@@ -190,6 +190,22 @@ Resources:
         - Key: Name
           Value: ClientSG
 
+  NatEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Tags:
+        - Key: Name
+          Value: NatEIP
+
+  NatGW:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatEIP.AllocationId
+      SubnetId: !Ref Public1Subnet
+      Tags:
+        - Key: Name
+          Value: NatGW
+
   PublicRT:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -228,6 +244,27 @@ Resources:
       RouteTableId: !Ref PublicRT
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
+
+  ClientRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref ClientRT
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref NatGW
+
+  APIRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref APIRT
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref NatGW
+
+  DBRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref DBRT
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref NatGW
 
   Public1RTA:
     Type: AWS::EC2::SubnetRouteTableAssociation

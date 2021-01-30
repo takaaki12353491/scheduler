@@ -74,7 +74,7 @@ Resources:
           Value: API2EC2
 
   ALB:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Tags:
         - Key: Name
@@ -122,7 +122,7 @@ Resources:
       LoadBalancerArn: !Ref ALB
 
   NLB:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       Tags:
         - Key: Name
