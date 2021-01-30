@@ -1,0 +1,42 @@
+#incomplete
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---
+Metadata: 
+
+Parameters: 
+
+Mappings: 
+
+Conditions: 
+
+Resources: 
+  HZ:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: meetune.net
+      HostedZoneTags:
+        - 
+          Key: Name
+          Value: HZ
+  RS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: 
+      Comment: 
+      Type: A
+      TTL: 
+      AliasTarget: 
+        DNSName: ALBDNSName
+        EvaluateTargetHealth: true
+        HostedZoneId: ALBHZID
+      Failover: 
+      GeoLocation: 
+      HealthCheckId: 
+      HostedZoneId: 
+      HostedZoneName: 
+      Region: ap-northeast-1a
+      ResourceRecords: 
+      - record
+      SetIdentifier: 
+      Weight: 
+Outputs:

@@ -167,3 +167,13 @@ Resources:
       Port: 80
       Protocol: HTTP
       LoadBalancerArn: !Ref NLB
+
+Outputs:
+  ALBDNSName:
+    Value: !GetAtt ALB.DNSName
+    Export: 
+      Name: ALBDNSName
+  ALBHZID:
+    Value: !GetAtt ALB.CanonicalHostedZoneID
+    Export: 
+      Name: ALBHZID
