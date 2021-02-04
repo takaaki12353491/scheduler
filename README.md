@@ -1,4 +1,5 @@
 # scheduler
+APIとの通信ができないなどまだまだ中途半端です。
 [サイト](https://meetune.net)  
 
 ## フロント
@@ -34,4 +35,4 @@ https://aws-cloud-tech.com/
 - APIの作成
 - テストの作成
 - CDの設定
-- Lambdaを使ったサーバーレス化
+- LambdaやFargateを使ったサーバーレス化
