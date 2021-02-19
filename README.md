@@ -22,6 +22,7 @@ https://aws-cloud-tech.com/
 ###### 主な技術
 - VPC
 - EC2(ALB)
+- ECS(Fargate)
 - Route53
 - Cloudformation
 
