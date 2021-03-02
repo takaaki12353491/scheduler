@@ -12,8 +12,6 @@ jobs:
   schedule:
     executor:
       name: go
-    branches:
-      only: schedule
     steps:
       - checkout
       - restore_cache:
@@ -47,4 +45,7 @@ workflows:
   version: 2
   build:
     jobs:
-      - schedule
+      - schedule:
+          filters:
+            branches:
+              only: schedule
