@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"api/domain/model"
+	"schedule/domain/model"
 	"time"
 )
 

@@ -1,33 +1,26 @@
 package main
 
 import (
-	"api/module"
-	"api/pb"
-	"net"
+	"schedule/infra"
+	"time"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
+	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 )
 
 func main() {
-	module.Initialize()
-	lis, err := net.Listen("tcp", ":9090")
+	godotenv.Load()
+	const LOCATION = "Asia/Tokyo"
+	loc, err := time.LoadLocation(LOCATION)
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		loc = time.FixedZone(LOCATION, 9*60*60)
 	}
-	s := grpc.NewServer(
-		grpc_middleware.WithUnaryServerChain(
-			grpc_auth.UnaryServerInterceptor(module.AuthFunc),
-		),
-	)
-	repo := NewRepository()
-	server := NewServer(repo)
-	pb.RegisterScheduleServiceServer(s, server)
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
-	}
+	time.Local = loc
+	// Log settings
+	log.SetFormatter(&log.JSONFormatter{
+		PrettyPrint: true,
+	})
+	log.SetReportCaller(true)
+
+	infra.NewServer()
 }
