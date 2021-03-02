@@ -1,7 +1,7 @@
 package infra
 
 import (
-	"os"
+	"schedule/env"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -30,11 +30,11 @@ func WithDBName(dbName string) Option {
 
 func NewConnection(ops ...Option) *gorm.DB {
 	conn := &Connection{
-		User:   os.Getenv("SCHEDULER_MYSQL_USER"),
-		Pass:   os.Getenv("SCHEDULER_MYSQL_PASSWORD"),
-		Host:   "localhost",
+		User:   env.SCHEDULER_MYSQL_USER,
+		Pass:   env.SCHEDULER_MYSQL_PASSWORD,
+		Host:   env.SCHEDULER_MYSQL_HOST,
 		Port:   "3306",
-		DBName: os.Getenv("SCHEDULER_MYSQL_DATABASE"),
+		DBName: env.SCHEDULER_MYSQL_DATABASE,
 		Option: "parseTime=true&loc=Asia%2FTokyo",
 	}
 	for _, option := range ops {
